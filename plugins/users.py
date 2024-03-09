@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 # Load environment variables
 BOT_TOKEN = os.environ.get('BOT_TOKEN', '')
-ADMIN = int(os.environ.get("ADMINS", ""))
+ADMINS = int(os.environ.get("ADMINS", ""))
 
 # Import helper functions
 from helper.database import botdata, find_one, total_user, getid
