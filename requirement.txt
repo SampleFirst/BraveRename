@@ -11,5 +11,5 @@ requests
 Flask
 gunicorn
 aiohttp
-pip
+pip==24.0
 
