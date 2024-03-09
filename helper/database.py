@@ -1,17 +1,20 @@
 import pymongo
 import os
 from helper.date import add_date
-
 DATABASE_NAME = os.environ.get("DATABASE_NAME", "")
 DATABASE_URL = os.environ.get("DATABASE_URL", "")
 mongo = pymongo.MongoClient(DATABASE_URL)
 db = mongo[DATABASE_NAME]
 dbcol = db["user"]
 
+# Total User
+
 
 def total_user():
     user = dbcol.count_documents({})
     return user
+
+# insert bot Data
 
 
 def botdata(chat_id):
@@ -33,9 +36,11 @@ def total_size(chat_id, total_size, now_file_size):
     dbcol.update_one({"_id": chat_id}, {"$set": {"total_size": str(now)}})
 
 
+# insert user data
 def insert(chat_id):
     user_id = int(chat_id)
-    user_det = {"_id": user_id, "file_id": None, "caption": None, "daily": 0, "date": 0, "uploadlimit": 1288490188, "used_limit": 0, "usertype": "Free", "prexdate": None}
+    user_det = {"_id": user_id, "file_id": None, "caption": None, "daily": 0, "date": 0,
+                "uploadlimit": 1288490188, "used_limit": 0, "usertype": "Free", "prexdate": None}
     try:
         dbcol.insert_one(user_det)
     except:
@@ -107,7 +112,6 @@ def getid():
         id = key["_id"]
         values.append((id))
     return values
-
 
 def delete(id):
     dbcol.delete_one(id)
