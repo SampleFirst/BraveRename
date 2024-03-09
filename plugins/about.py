@@ -7,7 +7,7 @@ TOKEN = os.environ.get('TOKENS','')
 botid = TOKEN.split(':')[0]
 
 
-@app.on_message(filters.private & filters.command("about"))
+@Client.on_message(filters.private & filters.command("about"))
 async def start(client,message):
     botdata(int(botid))
     data = find_one(int(botid))
