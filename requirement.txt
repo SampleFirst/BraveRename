@@ -1,0 +1,14 @@
+Pillow
+humanize
+hachoir
+pyrogram
+tgcrypto
+pymongo[srv]
+dnspython
+Flask
+gunicorn
+aiohttp
+wget
+pyrogram
+requests
+pip
