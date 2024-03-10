@@ -1,9 +1,8 @@
-import logging
-import logging.config
+import asyncio
+from pyrogram import Client, compose, idle
 import os
-# Get logging configurations
-logging.config.fileConfig('logging.conf')
-logging.getLogger().setLevel(logging.INFO)
+
+from plugins.cb_data import app as Client2
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "6483924561:AAGgvHt6ocAShXHah-FQV6IXJ7cxps9WDrA")
 API_ID = int(os.environ.get("API_ID", "10956858"))
@@ -12,41 +11,28 @@ STRING = os.environ.get("STRING", "BQCnMDoATgm6EV5D0XezMULX5ROFq3EMWEf50Sf3AXg8D
 SESSION = os.environ.get("SESSION", "rename")
 PORT = os.environ.get("PORT", "8080")
 
-from aiohttp import web
-from pyrogram import Client, __version__
-from pyrogram.raw.all import layer
-from plugins import web_server
 
 
-class Bot(Client):
+bot = Client(
 
-    def __init__(self):
-        super().__init__(
-            name=SESSION,
-            api_id=API_ID,
-            api_hash=API_HASH,
-            bot_token=BOT_TOKEN,
-            session_string=STRING,
-            workers=200,
-            plugins={"root": "plugins"},
-            sleep_threshold=10,
-        )
-        
-    async def start(self):
-        await super().start()
-        me = await self.get_me()
-        self.username = me.username
-        logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-                                
-        app = web.AppRunner(await web_server())
-        await app.setup()
-        bind_address = "0.0.0.0"
-        await web.TCPSite(app, bind_address, PORT).start()
+           name=SESSION,
 
-    async def stop(self, *args):
-        await super().stop()
-        logging.info("Bot Restarting.......")
+           bot_token=TOKEN,
 
+           api_id=API_ID,
 
-app = Bot()
-app.run()
+           api_hash=API_HASH,
+
+           plugins=dict(root='plugins'))
+           
+
+if STRING:
+    apps = [Client2,bot]
+    for app in apps:
+        app.start()
+    idle()
+    for app in apps:
+        app.stop()
+    
+else:
+    bot.run()
