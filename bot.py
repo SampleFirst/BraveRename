@@ -1,6 +1,7 @@
 import logging
 import logging.config
 import os
+
 # Get logging configurations
 logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
@@ -19,7 +20,6 @@ class Bot(Client):
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
-            session_string=STRING,
             workers=200,
             plugins={"root": "plugins"},
             sleep_threshold=10,
