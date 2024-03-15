@@ -25,8 +25,8 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("📁 Document", callback_data="upload_document"),
-                            InlineKeyboardButton("🎥 Video", callback_data="upload_video")
+                            InlineKeyboardButton("📁 Document", callback_data="doc"),
+                            InlineKeyboardButton("🎥 Video", callback_data="vid")
                         ]   
                     ]
                 )
@@ -35,7 +35,7 @@ async def refunc(client, message):
                         [
                             [
                                 InlineKeyboardButton("📁 Document", callback_data="doc"), 
-                                InlineKeyboardButton("🎵 audio", callback_data="upload_audio")
+                                InlineKeyboardButton("🎵 audio", callback_data="aud")
                             ]
                         ]
                     )
@@ -43,11 +43,11 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="upload_document")
+                                InlineKeyboardButton("📁 Document", callback_data="doc")
                             ]
                         ]
                     )
-                await message.reply_text(f"**Select the output file type**\n**🎞New Name** :- {out_filename}", reply_to_message_id=mg_id, reply_markup=markup)
+                await message.reply_text(f"**Select the output file type**\n\n**New Name** :- {out_filename}", reply_to_message_id=mg_id, reply_markup=markup)
 
             except:
                 try:
@@ -64,8 +64,8 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="upload_document"), 
-                                InlineKeyboardButton("🎥 Video", callback_data="upload_video")
+                                InlineKeyboardButton("📁 Document", callback_data="doc"), 
+                                InlineKeyboardButton("🎥 Video", callback_data="vid")
                             ]
                         ]
                     )
@@ -73,8 +73,8 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="upload_document"), 
-                                InlineKeyboardButton("🎵 audio", callback_data="upload_audio")
+                                InlineKeyboardButton("📁 Document", callback_data="doc"), 
+                                InlineKeyboardButton("🎵 audio", callback_data="aud")
                             ]
                         ]
                     )
@@ -82,12 +82,12 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="upload_document")
+                                InlineKeyboardButton("📁 Document", callback_data="doc")
                             ]
                         ]
                     )
                 await message.reply_text(
-                    f"**Select the output file type**\n**🎞New Name ->** :- {out_filename}",
+                    f"**Select the output file type**\n\n**New Name ->** :- {out_filename}",
                     reply_to_message_id=mg_id, 
                     reply_markup=markup
                 )
