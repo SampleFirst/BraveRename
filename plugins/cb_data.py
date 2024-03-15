@@ -14,6 +14,8 @@ from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
 from info import *
 
+downloads = DOWNLOAD_LOCATION
+
 
 
 @Client.on_callback_query(filters.regex('cancel'))
