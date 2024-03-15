@@ -26,9 +26,6 @@ class Bot(Client):
         )
         
     async def start(self):
-        # Create download directory if not exists
-        if not os.path.isdir(DOWNLOAD_LOCATION):
-            os.makedirs(DOWNLOAD_LOCATION)
         await super().start()
         me = await self.get_me()
         self.username = me.username
