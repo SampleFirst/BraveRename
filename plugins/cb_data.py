@@ -1,6 +1,8 @@
 from helper.progress import progress_for_pyrogram, TimeFormatter
+
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
+from pyrogram.types import (
+    InlineKeyboardButton, InlineKeyboardMarkup, ForceReply)
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from helper.database import *
@@ -12,10 +14,8 @@ from datetime import timedelta
 from helper.ffmpeg import take_screen_shot, fix_thumb
 from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
+import os
 from info import *
-
-downloads = DOWNLOAD_LOCATION
-
 
 
 @Client.on_callback_query(filters.regex('cancel'))
@@ -55,10 +55,6 @@ async def doc(bot, update):
     c_time = time.time()
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
-    # Ensure destination directory exists
-    destination_directory = os.path.dirname(file_path)
-    if not os.path.exists(destination_directory):
-        os.makedirs(destination_directory)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
 
@@ -100,7 +96,7 @@ async def doc(bot, update):
     if value < file.file_size:
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         try:
-            filw = await app.send_document(LOG_CHANNEL, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            filw = await app.send_document(log_channel, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
             mg_id = filw.id
             time.sleep(2)
@@ -151,18 +147,14 @@ async def vid(bot, update):
     c_time = time.time()
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
-    # Ensure destination directory exists
-    destination_directory = os.path.dirname(file_path)
-    if not os.path.exists(destination_directory):
-        os.makedirs(destination_directory)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
+
     except Exception as e:
         neg_used = used - int(file.file_size)
         used_limit(update.from_user.id, neg_used)
         await ms.edit(e)
         return
-
     splitpath = path.split("/downloads/")
     dow_file_name = splitpath[1]
     old_file_name = f"downloads/{dow_file_name}"
@@ -179,14 +171,13 @@ async def vid(bot, update):
     metadata = extractMetadata(createParser(file_path))
     if metadata.has("duration"):
         duration = metadata.get('duration').seconds
-
     if c_caption:
         vid_list = ["filename", "filesize", "duration"]
         new_tex = escape_invalid_curly_brackets(c_caption, vid_list)
-        caption = new_tex.format(filename=new_filename, filesize=humanbytes(file.file_size), duration=timedelta(seconds=duration))
+        caption = new_tex.format(filename=new_filename, filesize=humanbytes(
+            file.file_size), duration=timedelta(seconds=duration))
     else:
         caption = f"**{new_filename}**"
-
     if thumb:
         ph_path = await bot.download_media(thumb)
         Image.open(ph_path).convert("RGB").save(ph_path)
@@ -194,6 +185,7 @@ async def vid(bot, update):
         img.resize((320, 320))
         img.save(ph_path, "JPEG")
         c_time = time.time()
+
     else:
         try:
             ph_path_ = await take_screen_shot(file_path, os.path.dirname(os.path.abspath(file_path)), random.randint(0, duration - 1))
@@ -206,7 +198,7 @@ async def vid(bot, update):
     if value < file.file_size:
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         try:
-            filw = await app.send_video(LOG_CHANNEL, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            filw = await app.send_video(log_channel, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
             mg_id = filw.id
             time.sleep(2)
@@ -230,17 +222,7 @@ async def vid(bot, update):
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         c_time = time.time()
         try:
-            await bot.send_video(
-                update.from_user.id,
-                video=file_path,
-                thumb=ph_path,
-                duration=duration,
-                width=1920,  # Width of 1920 pixels
-                height=1080,  # Height of 1080 pixels
-                caption=caption,
-                progress=progress_for_pyrogram,
-                progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**", ms, c_time)
-            )
+            await bot.send_video(update.from_user.id, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             await ms.delete()
             os.remove(file_path)
         except Exception as e:
@@ -249,6 +231,7 @@ async def vid(bot, update):
             await ms.edit(e)
             os.remove(file_path)
             return
+
 
 @Client.on_callback_query(filters.regex("aud"))
 async def aud(bot, update):
@@ -264,10 +247,6 @@ async def aud(bot, update):
     used_limit(update.from_user.id, total_used)
     ms = await update.message.edit("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖")
     c_time = time.time()
-    # Ensure destination directory exists
-    destination_directory = os.path.dirname(file_path)
-    if not os.path.exists(destination_directory):
-        os.makedirs(destination_directory)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
     except Exception as e:
