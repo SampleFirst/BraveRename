@@ -16,16 +16,10 @@ from helper.date import check_expi
 import os
 from pyrogram import Client, filters, enums
 import asyncio
+from info import *
 
-CHANNEL = os.environ.get('CHANNEL', "")
-STRING = os.environ.get("STRING", "")
-ADMINS = int(os.environ.get("ADMINS",))
-BOT_USERNAME = os.environ.get("BOT_USERNAME","")
-LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", ""))
-BOT_TOKEN = os.environ.get('BOT_TOKEN', '')
 botid = BOT_TOKEN.split(':')[0]
-FLOOD = 500
-PICS = os.environ.get("PICS", "")
+
 
 currentTime = datetime.datetime.now()
 
