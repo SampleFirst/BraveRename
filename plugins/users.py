@@ -1,10 +1,8 @@
 import os
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from info import *
 
-# Load environment variables
-BOT_TOKEN = os.environ.get('BOT_TOKEN', '')
-ADMINS = int(os.environ.get("ADMINS", ""))
 
 # Import helper functions
 from helper.database import botdata, find_one, total_user, getid
