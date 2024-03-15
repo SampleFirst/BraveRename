@@ -22,6 +22,7 @@ PICS = environ.get("PICS", "")
 
 ADMINS = int(environ.get("ADMINS", 0))
 BOT_USERNAME = environ.get("BOT_USERNAME", "")
+DOWNLOAD_LOCATION = "./DOWNLOADS"
 FLOOD = 500
 
 # Database variables 
