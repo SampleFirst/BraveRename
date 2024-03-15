@@ -3,9 +3,8 @@ import os
 from pyrogram import Client, filters
 from helper.date import add_date
 from helper.database import uploadlimit, usertype, addpre
+from info import ADMINS, LOG_CHANNEL 
 
-ADMINS = int(os.environ.get("ADMINS", ))
-LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", ""))
 
 @Client.on_message(filters.private & filters.user(ADMINS) & filters.command("warn"))
 async def warn(c, m):
