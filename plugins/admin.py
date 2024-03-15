@@ -47,8 +47,8 @@ async def vip1(Client, message):
     usertype(int(user_id), "🪙 SILVER")
     addpre(int(user_id))
     await message.message.edit("Added successfully to premium upload limit 10 GB")
-    await Client.send_message(user_id, "You are upgraded to Silver. Check your plan here /myplan")
-    await Client.send_message(LOG_CHANNEL, "⚡ Plan upgraded successfully 💥\n\nHey, you are upgraded to Silver.")
+    await client.send_message(user_id, "You are upgraded to Silver. Check your plan here /myplan")
+    await client.send_message(LOG_CHANNEL, "⚡ Plan upgraded successfully 💥\n\nHey, you are upgraded to Silver.")
 
 @Client.on_callback_query(filters.regex('vip2'))
 async def vip2(Client, message):
@@ -59,7 +59,7 @@ async def vip2(Client, message):
     usertype(int(user_id), "💫 GOLD")
     addpre(int(user_id))
     await message.message.edit("Added successfully to premium upload limit 50 GB")
-    await Client.send_message(user_id, "Hey, you are upgraded to Gold.")
+    await client.send_message(user_id, "Hey, you are upgraded to Gold.")
 
 @Client.on_callback_query(filters.regex('vip3'))
 async def vip3(Client, message):
@@ -70,7 +70,7 @@ async def vip3(Client, message):
     usertype(int(user_id), "💎 DIAMOND")
     addpre(int(user_id))
     await message.message.edit("Added successfully to premium upload limit 100 GB")
-    await Client.send_message(user_id, "Hey, you are upgraded to Diamond.")
+    await client.send_message(user_id, "Hey, you are upgraded to Diamond.")
 
 @Client.on_callback_query(filters.regex('cp1'))
 async def cp1(Client, message):
@@ -81,7 +81,7 @@ async def cp1(Client, message):
     usertype(int(user_id), "**ACCOUNT DOWNGRADED**")
     addpre(int(user_id))
     await message.message.edit("Account downgraded\nThe user can only use 5.0 GB/day from data quota")
-    await Client.send_message(user_id, "⚠️ Warning ⚠️\n\n- Account downgraded\nYou can only use 5.0 GB/day from data quota. Check your plan here - /myplan\n- Contact admin.")
+    await client.send_message(user_id, "⚠️ Warning ⚠️\n\n- Account downgraded\nYou can only use 5.0 GB/day from data quota. Check your plan here - /myplan\n- Contact admin.")
 
 @Client.on_callback_query(filters.regex('cp2'))
 async def cp2(Client, message):
@@ -92,7 +92,7 @@ async def cp2(Client, message):
     usertype(int(user_id), "**ACCOUNT DOWNGRADED**")
     addpre(int(user_id))
     await message.message.edit("Account downgraded\nThe user can only use 2.5 GB/day from data quota")
-    await Client.send_message(user_id, "⛔️ Last warning ⛔️\n\n- Account downgraded\nYou can only use 2.4 GB/day from data quota. Check your plan here - /myplan\n- Contact admin.")
+    await client.send_message(user_id, "⛔️ Last warning ⛔️\n\n- Account downgraded\nYou can only use 2.4 GB/day from data quota. Check your plan here - /myplan\n- Contact admin.")
 
 @Client.on_callback_query(filters.regex('cp3'))
 async def cp3(Client, message):
@@ -103,7 +103,7 @@ async def cp3(Client, message):
     usertype(int(user_id), "**POWER CEASED !**")
     addpre(int(user_id))
     await message.message.edit("All power ceased from the user.\nThis account has 0 MB remaining capacity")
-    await Client.send_message(user_id, "🚫 All power ceased 🚫\n\n- All power has been ceased from you\nFrom now you can't rename files using me. Check your plan here - /myplan\n- Contact admin.")
+    await client.send_message(user_id, "🚫 All power ceased 🚫\n\n- All power has been ceased from you\nFrom now you can't rename files using me. Check your plan here - /myplan\n- Contact admin.")
 
 @Client.on_callback_query(filters.regex('dft'))
 async def dft(Client, message):
@@ -114,4 +114,4 @@ async def dft(Client, message):
     usertype(int(user_id), "**Free**")
     addpre(int(user_id))
     await message.message.edit("Daily data limit has been reset successfully. This account has default 5GB remaining capacity")
-    await Client.send_message(user_id, "Your daily data limit has been reset successfully.\nCheck your plan here - /myplan\n- Contact admin")
+    await client.send_message(user_id, "Your daily data limit has been reset successfully.\nCheck your plan here - /myplan\n- Contact admin")
