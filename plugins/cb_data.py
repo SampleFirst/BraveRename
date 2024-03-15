@@ -12,15 +12,8 @@ from datetime import timedelta
 from helper.ffmpeg import take_screen_shot, fix_thumb
 from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
+from info import *
 
-
-LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", ""))
-API_ID = int(os.environ.get("API_ID", ""))
-API_HASH = os.environ.get("API_HASH", "")
-STRING = os.environ.get("STRING", "")
-ADMINS = os.environ.get("ADMINS", "")
-
-app = Client("test", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 
 @Client.on_callback_query(filters.regex('cancel'))
