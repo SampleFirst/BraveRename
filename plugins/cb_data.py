@@ -1,6 +1,8 @@
 from helper.progress import progress_for_pyrogram, TimeFormatter
+
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
+from pyrogram.types import (
+    InlineKeyboardButton, InlineKeyboardMarkup, ForceReply)
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from helper.database import *
@@ -12,8 +14,8 @@ from datetime import timedelta
 from helper.ffmpeg import take_screen_shot, fix_thumb
 from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
+import os
 from info import *
-
 
 
 @Client.on_callback_query(filters.regex('cancel'))
@@ -23,6 +25,7 @@ async def cancel(bot, update):
     except:
         return
 
+
 @Client.on_callback_query(filters.regex('rename'))
 async def rename(bot, update):
     date_fa = str(update.message.date)
@@ -31,8 +34,10 @@ async def rename(bot, update):
     chat_id = update.message.chat.id
     id = update.message.reply_to_message_id
     await update.message.delete()
-    await update.message.reply_text(f"»»——— 𝙋𝙡𝙚𝙖𝙨𝙚 𝙚𝙣𝙩𝙚𝙧 𝙣𝙚𝙬 𝙛𝙞𝙡𝙚 𝙣𝙖𝙢𝙚...", reply_to_message_id=id, reply_markup=ForceReply(True))
+    await update.message.reply_text(f"»»——— 𝙋𝙡𝙚𝙖𝙨𝙚 𝙚𝙣𝙩𝙚𝙧 𝙣𝙚𝙬 𝙛𝙞𝙡𝙚 𝙣𝙖𝙢𝙚...", reply_to_message_id=id,
+                                    reply_markup=ForceReply(True))
     dateupdate(chat_id, date)
+
 
 @Client.on_callback_query(filters.regex("doc"))
 async def doc(bot, update):
@@ -52,18 +57,16 @@ async def doc(bot, update):
     used_limit(update.from_user.id, total_used)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
+
     except Exception as e:
         neg_used = used - int(file.file_size)
         used_limit(update.from_user.id, neg_used)
         await ms.edit(e)
         return
-
     splitpath = path.split("/downloads/")
     dow_file_name = splitpath[1]
     old_file_name = f"downloads/{dow_file_name}"
-    new_file_path = f"downloads/{new_filename}"  # Fixed destination path
-    os.rename(old_file_name, new_file_path)  # Renaming with correct destination path
-
+    os.rename(old_file_name, file_path)
     user_id = int(update.message.chat.id)
     data = find(user_id)
     try:
@@ -74,7 +77,8 @@ async def doc(bot, update):
     if c_caption:
         doc_list = ["filename", "filesize"]
         new_tex = escape_invalid_curly_brackets(c_caption, doc_list)
-        caption = new_tex.format(filename=new_filename, filesize=humanbytes(file.file_size))
+        caption = new_tex.format(
+            filename=new_filename, filesize=humanbytes(file.file_size))
     else:
         caption = f"**{new_filename}**"
     if thumb:
@@ -84,6 +88,7 @@ async def doc(bot, update):
         img.resize((320, 320))
         img.save(ph_path, "JPEG")
         c_time = time.time()
+
     else:
         ph_path = None
 
@@ -91,13 +96,13 @@ async def doc(bot, update):
     if value < file.file_size:
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         try:
-            filw = await app.send_document(LOG_CHANNEL, document=new_file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            filw = await app.send_document(LOG_CHANNEL, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
             mg_id = filw.id
             time.sleep(2)
             await bot.copy_message(update.from_user.id, from_chat, mg_id)
             await ms.delete()
-            os.remove(new_file_path)
+            os.remove(file_path)
             try:
                 os.remove(ph_path)
             except:
@@ -106,7 +111,7 @@ async def doc(bot, update):
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
             await ms.edit(e)
-            os.remove(new_file_path)
+            os.remove(file_path)
             try:
                 os.remove(ph_path)
             except:
@@ -115,15 +120,16 @@ async def doc(bot, update):
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         c_time = time.time()
         try:
-            await bot.send_document(update.from_user.id, document=new_file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            await bot.send_document(update.from_user.id, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             await ms.delete()
-            os.remove(new_file_path)
+            os.remove(file_path)
         except Exception as e:
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
             await ms.edit(e)
-            os.remove(new_file_path)
+            os.remove(file_path)
             return
+
 
 @Client.on_callback_query(filters.regex("vid"))
 async def vid(bot, update):
@@ -143,18 +149,16 @@ async def vid(bot, update):
     used_limit(update.from_user.id, total_used)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
+
     except Exception as e:
         neg_used = used - int(file.file_size)
         used_limit(update.from_user.id, neg_used)
         await ms.edit(e)
         return
-
     splitpath = path.split("/downloads/")
     dow_file_name = splitpath[1]
     old_file_name = f"downloads/{dow_file_name}"
-    new_file_path = f"downloads/{new_filename}"  # Fixed destination path
-    os.rename(old_file_name, new_file_path)  # Renaming with correct destination path
-
+    os.rename(old_file_name, file_path)
     user_id = int(update.message.chat.id)
     data = find(user_id)
     try:
@@ -164,17 +168,16 @@ async def vid(bot, update):
     thumb = data[0]
 
     duration = 0
-    metadata = extractMetadata(createParser(new_file_path))
+    metadata = extractMetadata(createParser(file_path))
     if metadata.has("duration"):
         duration = metadata.get('duration').seconds
-
     if c_caption:
         vid_list = ["filename", "filesize", "duration"]
         new_tex = escape_invalid_curly_brackets(c_caption, vid_list)
-        caption = new_tex.format(filename=new_filename, filesize=humanbytes(file.file_size), duration=timedelta(seconds=duration))
+        caption = new_tex.format(filename=new_filename, filesize=humanbytes(
+            file.file_size), duration=timedelta(seconds=duration))
     else:
         caption = f"**{new_filename}**"
-
     if thumb:
         ph_path = await bot.download_media(thumb)
         Image.open(ph_path).convert("RGB").save(ph_path)
@@ -182,9 +185,10 @@ async def vid(bot, update):
         img.resize((320, 320))
         img.save(ph_path, "JPEG")
         c_time = time.time()
+
     else:
         try:
-            ph_path_ = await take_screen_shot(new_file_path, os.path.dirname(os.path.abspath(new_file_path)), random.randint(0, duration - 1))
+            ph_path_ = await take_screen_shot(file_path, os.path.dirname(os.path.abspath(file_path)), random.randint(0, duration - 1))
             width, height, ph_path = await fix_thumb(ph_path_)
         except Exception as e:
             ph_path = None
@@ -194,13 +198,13 @@ async def vid(bot, update):
     if value < file.file_size:
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         try:
-            filw = await app.send_video(LOG_CHANNEL, video=new_file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            filw = await app.send_video(LOG_CHANNEL, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
             mg_id = filw.id
             time.sleep(2)
             await bot.copy_message(update.from_user.id, from_chat, mg_id)
             await ms.delete()
-            os.remove(new_file_path)
+            os.remove(file_path)
             try:
                 os.remove(ph_path)
             except:
@@ -209,7 +213,7 @@ async def vid(bot, update):
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
             await ms.edit(e)
-            os.remove(new_file_path)
+            os.remove(file_path)
             try:
                 os.remove(ph_path)
             except:
@@ -218,15 +222,16 @@ async def vid(bot, update):
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         c_time = time.time()
         try:
-            await bot.send_video(update.from_user.id, video=new_file_path, thumb=ph_path, duration=duration, width=1920, height=1080, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**", ms, c_time))
+            await bot.send_video(update.from_user.id, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             await ms.delete()
-            os.remove(new_file_path)
+            os.remove(file_path)
         except Exception as e:
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
             await ms.edit(e)
-            os.remove(new_file_path)
+            os.remove(file_path)
             return
+
 
 @Client.on_callback_query(filters.regex("aud"))
 async def aud(bot, update):
@@ -238,11 +243,10 @@ async def aud(bot, update):
     file_path = f"downloads/{new_filename}"
     message = update.message.reply_to_message
     file = message.document or message.video or message.audio
-    ms = await update.message.edit("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖")
-    used_limit(update.from_user.id, file.file_size)
-    c_time = time.time()
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
+    ms = await update.message.edit("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖")
+    c_time = time.time()
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
     except Exception as e:
@@ -250,55 +254,54 @@ async def aud(bot, update):
         used_limit(update.from_user.id, neg_used)
         await ms.edit(e)
         return
-
     splitpath = path.split("/downloads/")
     dow_file_name = splitpath[1]
     old_file_name = f"downloads/{dow_file_name}"
-    new_file_path = f"downloads/{new_filename}"  # Fixed destination path
-    os.rename(old_file_name, new_file_path)  # Renaming with correct destination path
-
+    os.rename(old_file_name, file_path)
+    duration = 0
+    metadata = extractMetadata(createParser(file_path))
+    if metadata.has("duration"):
+        duration = metadata.get('duration').seconds
     user_id = int(update.message.chat.id)
     data = find(user_id)
-    try:
-        c_caption = data[1]
-    except:
-        pass
+    c_caption = data[1]
     thumb = data[0]
-
     if c_caption:
-        aud_list = ["filename", "filesize"]
+        aud_list = ["filename", "filesize", "duration"]
         new_tex = escape_invalid_curly_brackets(c_caption, aud_list)
-        caption = new_tex.format(filename=new_filename, filesize=humanbytes(file.file_size))
+        caption = new_tex.format(filename=new_filename, filesize=humanbytes(
+            file.file_size), duration=timedelta(seconds=duration))
     else:
         caption = f"**{new_filename}**"
 
-    value = 2090000000
-    if value < file.file_size:
+    if thumb:
+        ph_path = await bot.download_media(thumb)
+        Image.open(ph_path).convert("RGB").save(ph_path)
+        img = Image.open(ph_path)
+        img.resize((320, 320))
+        img.save(ph_path, "JPEG")
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
+        c_time = time.time()
         try:
-            filw = await app.send_audio(LOG_CHANNEL, audio=new_file_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
-            from_chat = filw.chat.id
-            mg_id = filw.id
-            time.sleep(2)
-            await bot.copy_message(update.from_user.id, from_chat, mg_id)
+            await bot.send_audio(update.message.chat.id, audio=file_path, caption=caption, thumb=ph_path, duration=duration, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             await ms.delete()
-            os.remove(new_file_path)
+            os.remove(file_path)
+            os.remove(ph_path)
         except Exception as e:
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
             await ms.edit(e)
-            os.remove(new_file_path)
-            return
+            os.remove(file_path)
+            os.remove(ph_path)
     else:
         await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
         c_time = time.time()
         try:
-            await bot.send_audio(update.from_user.id, audio=new_file_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            await bot.send_audio(update.message.chat.id, audio=file_path, caption=caption, duration=duration, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             await ms.delete()
-            os.remove(new_file_path)
+            os.remove(file_path)
         except Exception as e:
+            await ms.edit(e)
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
-            await ms.edit(e)
-            os.remove(new_file_path)
-            return
+            os.remove(file_path)
