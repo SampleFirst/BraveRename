@@ -1,8 +1,8 @@
 import pymongo
 import os
 from helper.date import add_date
-DATABASE_NAME = os.environ.get("DATABASE_NAME", "")
-DATABASE_URL = os.environ.get("DATABASE_URL", "")
+from info import *
+
 mongo = pymongo.MongoClient(DATABASE_URL)
 db = mongo[DATABASE_NAME]
 dbcol = db["user"]
