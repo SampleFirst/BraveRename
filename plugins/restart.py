@@ -3,13 +3,12 @@ import random
 import time
 import os
 import requests
+from info import *
 
 restart_time_minutes = random.randint(2, 5)
 restart_time_seconds = random.randint(0, 59)
 restart_time = datetime.timedelta(minutes=restart_time_minutes, seconds=restart_time_seconds)
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
-SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT")
 
 is_restarted = True
 
