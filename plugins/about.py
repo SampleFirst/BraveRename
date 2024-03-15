@@ -2,9 +2,9 @@ import os
 from pyrogram import Client, filters
 from helper.database import botdata, find_one
 from helper.progress import humanbytes
-from info import TOKEN
+from info import BOT_TOKEN
 
-botid = TOKEN.split(':')[0]
+botid = BOT_TOKEN.split(':')[0]
 
 
 @Client.on_message(filters.private & filters.command("about"))
