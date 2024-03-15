@@ -55,6 +55,10 @@ async def doc(bot, update):
     c_time = time.time()
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
+    # Ensure destination directory exists
+    destination_directory = os.path.dirname(file_path)
+    if not os.path.exists(destination_directory):
+        os.makedirs(destination_directory)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
 
@@ -147,6 +151,10 @@ async def vid(bot, update):
     c_time = time.time()
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
+    # Ensure destination directory exists
+    destination_directory = os.path.dirname(file_path)
+    if not os.path.exists(destination_directory):
+        os.makedirs(destination_directory)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
     except Exception as e:
@@ -256,6 +264,10 @@ async def aud(bot, update):
     used_limit(update.from_user.id, total_used)
     ms = await update.message.edit("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖")
     c_time = time.time()
+    # Ensure destination directory exists
+    destination_directory = os.path.dirname(file_path)
+    if not os.path.exists(destination_directory):
+        os.makedirs(destination_directory)
     try:
         path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
     except Exception as e:
