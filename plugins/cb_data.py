@@ -1,8 +1,6 @@
 from helper.progress import progress_for_pyrogram, TimeFormatter
-
 from pyrogram import Client, filters
-from pyrogram.types import (
-    InlineKeyboardButton, InlineKeyboardMarkup, ForceReply)
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from helper.database import *
@@ -34,8 +32,11 @@ async def rename(bot, update):
     chat_id = update.message.chat.id
     id = update.message.reply_to_message_id
     await update.message.delete()
-    await update.message.reply_text(f"»»——— 𝙋𝙡𝙚𝙖𝙨𝙚 𝙚𝙣𝙩𝙚𝙧 𝙣𝙚𝙬 𝙛𝙞𝙡𝙚 𝙣𝙖𝙢𝙚...", reply_to_message_id=id,
-                                    reply_markup=ForceReply(True))
+    await update.message.reply_text(
+        f"Enter New File name...", 
+        reply_to_message_id=id,
+        reply_markup=ForceReply(True)
+    )
     dateupdate(chat_id, date)
 
 
@@ -49,13 +50,13 @@ async def doc(bot, update):
     file_path = f"downloads/{new_filename}"
     message = update.message.reply_to_message
     file = message.document or message.video or message.audio
-    ms = await update.message.edit("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖")
+    ms = await update.message.edit("\nBuilding Metadata...")
     used_limit(update.from_user.id, file.file_size)
     c_time = time.time()
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
     try:
-        path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
+        path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\nBuilding Metadata...",  ms, c_time))
 
     except Exception as e:
         neg_used = used - int(file.file_size)
@@ -93,9 +94,9 @@ async def doc(bot, update):
 
     value = 2090000000
     if value < file.file_size:
-        await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
+        await ms.edit("Preparing to receive file...")
         try:
-            filw = await app.send_document(LOG_CHANNEL, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            filw = await bot.send_document(LOG_CHANNEL, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
             mg_id = filw.id
             time.sleep(2)
@@ -116,7 +117,7 @@ async def doc(bot, update):
             except:
                 return
     else:
-        await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
+        await ms.edit("Preparing to receive file...")
         c_time = time.time()
         try:
             await bot.send_document(update.from_user.id, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
@@ -140,13 +141,13 @@ async def vid(bot, update):
     file_path = f"downloads/{new_filename}"
     message = update.message.reply_to_message
     file = message.document or message.video or message.audio
-    ms = await update.message.edit("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖")
+    ms = await update.message.edit("\nBuilding Metadata...")
     used_limit(update.from_user.id, file.file_size)
     c_time = time.time()
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
     try:
-        path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
+        path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\nBuilding Metadata...",  ms, c_time))
 
     except Exception as e:
         neg_used = used - int(file.file_size)
@@ -194,9 +195,9 @@ async def vid(bot, update):
 
     value = 2090000000
     if value < file.file_size:
-        await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
+        await ms.edit("Preparing to receive file...")
         try:
-            filw = await app.send_video(LOG_CHANNEL, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
+            filw = await bot.send_video(LOG_CHANNEL, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
             mg_id = filw.id
             time.sleep(2)
@@ -217,7 +218,7 @@ async def vid(bot, update):
             except:
                 return
     else:
-        await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
+        await ms.edit("Preparing to receive file...")
         c_time = time.time()
         try:
             await bot.send_video(update.from_user.id, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
@@ -242,10 +243,10 @@ async def aud(bot, update):
     file = message.document or message.video or message.audio
     total_used = used + int(file.file_size)
     used_limit(update.from_user.id, total_used)
-    ms = await update.message.edit("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖")
+    ms = await update.message.edit("\nBuilding Metadata...")
     c_time = time.time()
     try:
-        path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\n༻☬ད𝘽𝙪𝙡𝙞𝙙𝙞𝙣𝙜 𝙕𝙤𝙧𝙤 𝙈𝙚𝙩𝙖𝙙𝙖𝙩𝙖",  ms, c_time))
+        path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("\nBuilding Metadata...",  ms, c_time))
     except Exception as e:
         neg_used = used - int(file.file_size)
         used_limit(update.from_user.id, neg_used)
@@ -277,7 +278,7 @@ async def aud(bot, update):
         img = Image.open(ph_path)
         img.resize((320, 320))
         img.save(ph_path, "JPEG")
-        await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
+        await ms.edit("Preparing to receive file...")
         c_time = time.time()
         try:
             await bot.send_audio(update.message.chat.id, audio=file_path, caption=caption, thumb=ph_path, duration=duration, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
@@ -291,7 +292,7 @@ async def aud(bot, update):
             os.remove(file_path)
             os.remove(ph_path)
     else:
-        await ms.edit("**⎝⎝✧ 𝘗𝘳𝘦𝘱𝘢𝘳𝘪𝘯𝘨 𝘛𝘰 𝘙𝘦𝘤𝘦𝘪𝘷𝘦 𝘡𝘰𝘳𝘰 𝘍𝘪𝘭𝘦 ✧⎠⎠**")
+        await ms.edit("Preparing to receive file...")
         c_time = time.time()
         try:
             await bot.send_audio(update.message.chat.id, audio=file_path, caption=caption, duration=duration, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
