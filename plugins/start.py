@@ -1,4 +1,4 @@
-from datetime import date as date_
+ from datetime import date as date_
 import datetime
 import os
 import random
@@ -125,7 +125,7 @@ async def help_callback_handler(client, query):
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
     await query.message.edit_text(
-        text=script.HELP_TEXT.format(query.from_user.mention),
+        text=script.HELP_TEXT,
         reply_markup=reply_markup,
         parse_mode=enums.ParseMode.HTML
     )
@@ -158,7 +158,7 @@ async def about_callback_handler(client, query):
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
     await query.message.edit_text(
-        text=script.ABOUT_TEXT.format(query.from_user.mention),
+        text=script.ABOUT_TEXT,
         reply_markup=reply_markup,
         parse_mode=enums.ParseMode.HTML
     )
