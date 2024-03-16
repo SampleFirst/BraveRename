@@ -21,24 +21,7 @@ from info import *
 botid = BOT_TOKEN.split(':')[0]
 
 
-currentTime = datetime.datetime.now()
-
-if currentTime.hour < 12:
-    wish = "❤️ ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ ꜱᴡᴇᴇᴛʜᴇᴀʀᴛ ❤️"
-    period = "AM"
-elif 12 <= currentTime.hour < 16:
-    wish = '🤍 ɢᴏᴏᴅ ᴀꜰᴛᴇʀɴᴏᴏɴ ᴍʏ ʟᴏᴠᴇ 🤍'
-    period = "PM"
-elif 16 <= currentTime.hour < 21:
-    wish = '🦋 ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ ʙᴀʙʏ 🦋'
-    period = "PM"
-else:
-    wish = '🌙 ɢᴏᴏᴅ ɴɪɢʜᴛ ᴍʏ ꜱᴡᴇᴇᴛɪᴇ 🌙'
-    period = "PM"
-hour_12_format = currentTime.strftime("%I:%M %p")
-final_wish = f"{wish} ({hour_12_format} {period})"
-
-@Client.on_message(filters.private & filters.command(["start"]))
+@Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
     loading_sticker_message = await message.reply_sticker("CAACAgUAAxkBAAEKDf1k3mCOA5HUO51nPYSN-yaCNFj1PQAC7QoAAgEFoFRUQkvwYhdUWTAE")
     await asyncio.sleep(2)
@@ -47,40 +30,39 @@ async def start(client, message):
     try:
         id = message.text.split(' ')[1]
     except:
-        txt=f"""ʜᴇʟʟᴏ {wish} {message.from_user.first_name } \n\n
-➻ ᴛʜɪꜱ ɪꜱ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴅ ʏᴇᴛ ᴘᴏᴡᴇʀꜰᴜʟ ʀᴇɴᴀᴍᴇ ʙᴏᴛ. \n
-➻ ᴜꜱɪɴɢ ᴛʜɪꜱ ʙᴏᴛ ʏᴏᴜ ᴄᴀɴ ʀᴇɴᴀᴍᴇ ᴀɴᴅ ᴄʜᴀɴɢᴇ ᴛʜᴜᴍʙɴᴀɪʟ ᴏꜰ ʏᴏᴜʀ ꜰɪʟᴇꜱ\n
-➻ ʏᴏᴜ ᴄᴀɴ ᴀʟꜱᴏ ᴄᴏɴᴠᴇʀᴛ ᴠɪᴅᴇᴏ ᴛᴏ ꜰɪʟᴇ ᴀɴᴅ ꜰɪʟᴇ ᴛᴏ ᴠɪᴅᴇᴏ.\n 
-➻ ᴛʜɪꜱ ʙᴏᴛ ᴀʟꜱᴏ ꜱᴜᴘᴘᴏʀᴛꜱ ᴄᴜꜱᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ ᴀɴᴅ ᴄᴜꜱᴛᴏᴍ ᴄᴀᴘᴛɪᴏɴ."""
         await message.reply_photo(
             photo=PICS,
-            caption=txt,
+            caption=script.START_TEXT.format(message.from_user.mention),
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url="https://t.me/CinemaVenoOfficial")
+                        InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
+                        InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
                     ],
                     [
-                        InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
+                        InlineKeyboardButton("Help", callback_data='help'),
+                        InlineKeyboardButton("About", callback_data='about')
                     ]
                 ]
             )
         )
         return
     if id:
-        if old == True:
+        if old:
             try:
-                await client.send_message(id, "ʏᴏᴜʀ ꜰʀɪᴇɴᴅ ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴜꜱɪɴɢ ᴏᴜʀ ʙᴏᴛ")
+                await client.send_message(id, script.WONX_TEXT)
                 await message.reply_photo(
                     photo=PICS,
-                    caption=txt,
+                    caption=script.START_TEXT.format(message.from_user.mention),
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url="https://t.me/CinemaVenoOfficial")
+                                InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
+                                InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
                             ],
                             [
-                                InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
+                                InlineKeyboardButton("Help", callback_data='help'),
+                                InlineKeyboardButton("About", callback_data='about')
                             ]
                         ]
                     )
@@ -88,33 +70,37 @@ async def start(client, message):
             except:
                 return
         else:
-            await client.send_message(id, "Congrats! You Won 10GB Upload limit")
+            await client.send_message(id, script.WON_TEXT)
             _user_ = find_one(int(id))
             limit = _user_["uploadlimit"]
             new_limit = limit + 10737418240
             uploadlimit(int(id), new_limit)
-            await message.reply_text(text=f"""ʜᴇʟʟᴏ {wish} {message.from_user.first_name } \n\n
-➻ ᴛʜɪꜱ ɪꜱ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴅ ʏᴇᴛ ᴘᴏᴡᴇʀꜰᴜʟ ʀᴇɴᴀᴍᴇ ʙᴏᴛ. \n
-➻ ᴜꜱɪɴɢ ᴛʜɪꜱ ʙᴏᴛ ʏᴏᴜ ᴄᴀɴ ʀᴇɴᴀᴍᴇ ᴀɴᴅ ᴄʜᴀɴɢᴇ ᴛʜᴜᴍʙɴᴀɪʟ ᴏꜰ ʏᴏᴜʀ ꜰɪʟᴇꜱ\n
-➻ ʏᴏᴜ ᴄᴀɴ ᴀʟꜱᴏ ᴄᴏɴᴠᴇʀᴛ ᴠɪᴅᴇᴏ ᴛᴏ ꜰɪʟᴇ ᴀɴᴅ ꜰɪʟᴇ ᴛᴏ ᴠɪᴅᴇᴏ.\n 
-➻ ᴛʜɪꜱ ʙᴏᴛ ᴀʟꜱᴏ ꜱᴜᴘᴘᴏʀᴛꜱ ᴄᴜꜱᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ ᴀɴᴅ ᴄᴜꜱᴛᴏᴍ ᴄᴀᴘᴛɪᴏɴ.""", reply_to_message_id=message.id,
-            reply_markup=InlineKeyboardMarkup(
-                [
+            await message.reply_text(
+                caption=script.START_TEXT.format(message.from_user.mention), 
+                reply_to_message_id=message.id,
+                reply_markup=InlineKeyboardMarkup(
                     [
-                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url="https://t.me/CinemaVenoOfficial")
-                    ],
-                    [
-                        InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
+                        [
+                            InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL))
+                        ],
+                        [
+                            InlineKeyboardButton("Help", callback_data='help')
+                        ]
                     ]
-                ]
+                )
             )
-        )
+
+@Client.on_message(filters.command('logs') & filters.user(ADMINS))
+async def log_file(bot, message):
+    """Send log file"""
+    try:
+        await message.reply_document('TelegramBot.log')
+    except Exception as e:
+        await message.reply(str(e))
 
 @Client.on_callback_query(filters.regex(r"^help$"))
-async def help_callback_handler(_, query):
+async def help_callback_handler(client, query):
     loading_placeholder = "◌◌◌"
-    
-    # Edit the original message with the loading placeholder
     await query.message.edit_text(
         text=loading_placeholder,
         parse_mode=enums.ParseMode.HTML
@@ -126,98 +112,124 @@ async def help_callback_handler(_, query):
             text=loading_placeholder,
             parse_mode=enums.ParseMode.HTML
         )
-        
+
     buttons = [
         [
-            InlineKeyboardButton('ᴛʜᴜᴍʙɴᴀɪʟ', callback_data='thumbnail'),
-            InlineKeyboardButton('ᴄᴀᴘᴛɪᴏɴ', callback_data='caption')
+            InlineKeyboardButton('Thumbnail', callback_data='thumbnail'),
+            InlineKeyboardButton('Caption', callback_data='caption')
         ],
         [
-            InlineKeyboardButton('ʀᴇɴᴅᴇʀɪɴɢ ɪɴꜰᴏ', callback_data='render')
-        ],
-        [
-            InlineKeyboardButton('ʜᴏᴍᴇ', callback_data='home'),
-            InlineKeyboardButton('ꜱᴏᴜʀᴄᴇ', callback_data='source')
+            InlineKeyboardButton('Home', callback_data='home'),
+            InlineKeyboardButton('About', callback_data='about')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
     await query.message.edit_text(
-        text=script.HELP_TXT.format(query.from_user.mention),
+        text=script.HELP_TEXT.format(query.from_user.mention),
         reply_markup=reply_markup,
         parse_mode=enums.ParseMode.HTML
     )
 
-    
+
+@Client.on_callback_query(filters.regex(r"^about$"))
+async def about_callback_handler(client, query):
+    loading_placeholder = "◌◌◌"
+    await query.message.edit_text(
+        text=loading_placeholder,
+        parse_mode=enums.ParseMode.HTML
+    )
+    for _ in range(3):
+        await asyncio.sleep(0.2)  # Simulating loading delay
+        loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
+
+    buttons = [
+        [
+            InlineKeyboardButton('Thumbnail', callback_data='thumbnail'),
+            InlineKeyboardButton('Caption', callback_data='caption')
+        ],
+        [
+            InlineKeyboardButton('Home', callback_data='home'),
+            InlineKeyboardButton('Help', callback_data='help')
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await query.message.edit_text(
+        text=script.ABOUT_TEXT.format(query.from_user.mention),
+        reply_markup=reply_markup,
+        parse_mode=enums.ParseMode.HTML
+    )
+
+
 @Client.on_callback_query(filters.regex(r"^caption$"))
-async def caption_callback_handler(_, query):
-    buttons = [
-        [InlineKeyboardButton('Back', callback_data='help')]
-    ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await query.message.edit_text(
-        text=script.CAPTION_TXT,
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML
-    )
-    
-@Client.on_callback_query(filters.regex(r"^thumbnail$"))
-async def thumbnail_callback_handler(_, query):
-    buttons = [
-        [InlineKeyboardButton('Back', callback_data='help')]
-    ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await query.message.edit_text(
-        text=script.THUMBNAIL_TXT,
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML
-    )
-    
-@Client.on_callback_query(filters.regex(r"^home$"))
-async def home_callback_handler(_, query):
-    home_text = f"""ʜᴇʟʟᴏ {wish} {query.from_user.first_name} \n\n
-➻ ᴛʜɪꜱ ɪꜱ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴅ ʏᴇᴛ ᴘᴏᴡᴇʀꜰᴜʟ ʀᴇɴᴀᴍᴇ ʙᴏᴛ.\n
-➻ ᴜꜱɪɴɢ ᴛʜɪꜱ ʙᴏᴛ ʏᴏᴜ ᴄᴀɴ ʀᴇɴᴀᴍᴇ ᴀɴᴅ ᴄʜᴀɴɢᴇ ᴛʜᴜᴍʙɴᴀɪʟ ᴏꜰ ʏᴏᴜʀ ꜰɪʟᴇꜱ\n
-➻ ʏᴏᴜ ᴄᴀɴ ᴀʟꜱᴏ ᴄᴏɴᴠᴇʀᴛ ᴠɪᴅᴇᴏ ᴛᴏ ꜰɪʟᴇ ᴀɴᴅ ꜰɪʟᴇ ᴛᴏ ᴠɪᴅᴇᴏ.\n 
-➻ ᴛʜɪꜱ ʙᴏᴛ ᴀʟꜱᴏ ꜱᴜᴘᴘᴏʀᴛꜱ ᴄᴜꜱᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ ᴀɴᴅ ᴄᴜꜱᴛᴏᴍ ᴄᴀᴘᴛɪᴏɴ."""
-    
+async def caption_callback_handler(client, query):
     buttons = [
         [
-                InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url="https://t.me/CinemaVenoOfficial")
-        ],
-        [
-                InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url='https://t.me/+9Y0zeiIAFeczMDJl'),
-                InlineKeyboardButton("ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ", url='https://t.me/CinemaVenoOfficial')
-        ],
-        [
-                InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
+            InlineKeyboardButton('Back', callback_data='help')
         ]
-    ]    
-    reply_markup = InlineKeyboardMarkup(buttons)    
-    await query.message.edit_text(text=home_text, reply_markup=reply_markup)
- 
-@Client.on_callback_query(filters.regex(r"^render$"))
-async def render_callback_handler(_, query):
-    render_text = f"""ꜱʏꜱᴛᴇᴍ ꜱᴛᴀᴛᴜꜱ 
-
-❂ ʀᴀᴍ: {"●" * random.randint(3, 4) + "◌" * (5 - random.randint(3, 4))}
-✤ ᴄᴘᴜ: {"●" * random.randint(3, 5) + "◌" * (5 - random.randint(3, 5))}
-✪ ᴅᴀᴛᴀ: {"●" * random.randint(2, 5) + "◌" * (5 - random.randint(2, 5))}
-
-ᴠ[2.3.4] ꜱᴛᴀʙʟᴇ"""
-    
-    await query.answer(text=render_text, show_alert=True)
-    
-@Client.on_callback_query(filters.regex(r"^source$"))
-async def source_callback_handler(_, query):
-    buttons = [
-        [InlineKeyboardButton('Back', callback_data='help')]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
     await query.message.edit_text(
-        text=script.SOURCE_TXT,
+        text=script.CAPTION_TEXT,
         reply_markup=reply_markup,
         parse_mode=enums.ParseMode.HTML
     )
+
+
+@Client.on_callback_query(filters.regex(r"^thumbnail$"))
+async def thumbnail_callback_handler(client, query):
+    buttons = [
+        [
+            InlineKeyboardButton('Back', callback_data='help')
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await query.message.edit_text(
+        text=script.THUMBNAIL_TEXT,
+        reply_markup=reply_markup,
+        parse_mode=enums.ParseMode.HTML
+    )
+
+
+@Client.on_callback_query(filters.regex(r"^home$"))
+async def home_callback_handler(client, query):
+    home_text = script.START_TEXT.format(query.from_user.mention)
+    buttons = [
+        [
+            InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
+            InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
+        ],
+        [
+            InlineKeyboardButton("Help", callback_data='help'),
+            InlineKeyboardButton("About", callback_data='about')
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await query.message.edit_text(text=home_text, reply_markup=reply_markup)
+
+
+@Client.on_callback_query(filters.regex(r"^render$"))
+async def render_callback_handler(client, query):
+    await query.answer(text=script.RENDER_TEXT, show_alert=True)
+
+
+@Client.on_callback_query(filters.regex(r"^source$"))
+async def source_callback_handler(client, query):
+    buttons = [
+        [
+            InlineKeyboardButton('Back', callback_data='help')
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await query.message.edit_text(
+        text=script.SOURCE_TEXT,
+        reply_markup=reply_markup,
+        parse_mode=enums.ParseMode.HTML
+    )
+
 
 @Client.on_message((filters.private & (filters.document | filters.audio | filters.video)) | filters.channel & (filters.document | filters.audio | filters.video))
 async def send_doc(client, message):
@@ -230,18 +242,19 @@ async def send_doc(client, message):
             _newus = find_one(message.from_user.id)
             user = _newus["usertype"]
             await message.reply_text(
-                "**__ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ꜱᴜʙꜱᴄʀɪʙᴇᴅ ᴍʏ ᴄʜᴀɴɴᴇʟ__** ",
-                 reply_to_message_id=message.id,
-                 reply_markup=InlineKeyboardMarkup(
-                     [
+                caption=script.SUB_TEXT.format(message.from_user.mention),
+                reply_to_message_id=message.id,
+                reply_markup=InlineKeyboardMarkup(
+                    [
                         [
-                            InlineKeyboardButton("⏫ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ⏫", url=f"https://t.me/CinemaVenoOfficial")
+                            InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL))
                         ]
-                     ]
-                 )
+                    ]
+                )
             )
             await client.send_message(
-                LOG_CHANNEL,f"#new_user,\n\n**ID** : `{user_id}`\n**Name**: {message.from_user.first_name} {message.from_user.last_name}\n**User-Plan** : {user}\n\n ",
+                LOG_CHANNEL,
+                caption=script.LOG_TEXT.format(user_id, message.from_user.mention, user),
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -265,23 +278,22 @@ async def send_doc(client, message):
         user_type = user_deta["usertype"]
     except:
         await message.reply_text(
-            text=f"ʜᴇʟʟᴏ dear {message.from_user.first_name}  **we are currently working on this issue**\n\nPlease try to rename files from your another account.\nBecause this BOT can't rename file sent by some ids.\n\nIf you are an **ADMINS** Don't worry ! here we have a solution for you dear {message.from_user.first_name }.\n\nPlease use \n🎗️ `/addpremium your_other_userid` 🆔 to use premium feautres\n\n",
+            caption=script.START_TEXT.format(query.from_user.mention),
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url="https://t.me/CinemaVenoOfficial")
-                    ],
-                    [   InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url='https://t.me/+9Y0zeiIAFeczMDJl'),
-                        InlineKeyboardButton("ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ", url='https://t.me/CinemaVenoOfficial')
+                        InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
+                        InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
                     ],
                     [
-                        InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
+                        InlineKeyboardButton("Help", callback_data='help'),
+                        InlineKeyboardButton("About", callback_data='about')
                     ]
                 ]
             )
         )
-        await message.reply_text(text=f"🦋")
-        return 
+
+        return
     c_time = time.time()
     if user_type == "Free":
         LIMIT = 600
@@ -292,7 +304,7 @@ async def send_doc(client, message):
     conversion = datetime.timedelta(seconds=left)
     ltime = str(conversion)
     if left > 0:
-        await message.reply_text(f"```ꜱᴏʀʀʏ ᴅᴜᴅᴇ ɪ ᴀᴍ ɴᴏᴛ ᴏɴʟʏ ꜰᴏʀ ʏᴏᴜ \n ꜰʟᴏᴏᴅ ᴄᴏɴᴛʀᴏʟ ɪꜱ ᴀᴄᴛɪᴠᴇ ꜱᴏ ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ ꜰᴏʀ {ltime}```", reply_to_message_id=message.id)
+        await message.reply_text(caption=script.FLOOD_TEXT.format(ltime), reply_to_message_id=message.id)
     else:
         media = await client.get_messages(message.chat.id, message.id)
         file = media.document or media.video or media.audio
@@ -311,26 +323,55 @@ async def send_doc(client, message):
             used_limit(message.from_user.id, 0)
         remain = limit - used
         if remain < int(file.file_size):
-            await message.reply_text(f"100% ᴏꜰ ᴅᴀɪʟʏ {humanbytes(limit)} ᴅᴀᴛᴀ Qᴜᴏᴛᴀ ᴇxʜᴀᴜꜱᴛᴇᴅ.\n\n  ꜰɪʟᴇ ꜱɪᴢᴇ ᴅᴇᴛᴇᴄᴛᴇᴅ {humanbytes(file.file_size)}\n  ᴜꜱᴇᴅ ᴅᴀɪʟʏ ʟɪᴍɪᴛ {humanbytes(used)}\n\nʏᴏᴜ ʜᴀᴠᴇ ᴏɴʟʏ **{humanbytes(remain)}** ʟᴇꜰᴛ ᴏɴ ʏᴏᴜʀ ᴀᴄᴄᴏᴜɴᴛ.\nɪꜰ ᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇɴᴀᴍᴇ ʟᴀʀɢᴇ ꜰɪʟᴇ ᴜᴘɢʀᴀᴅᴇ ʏᴏᴜʀ ᴘʟᴀɴ", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘɢʀᴀᴅᴇ 💰💳", callback_data="upgrade")]]))
+            await message.reply_text(
+                caption=script.EXP_QUOTA_TEXT.format(humanbytes(limit), humanbytes(file.file_size), humanbytes(used), humanbytes(remain)),
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("Upgrade 💳", callback_data="upgrade")
+                        ]
+                    ]
+                )
+            )
             return
         if value < file.file_size:
-            
+
             if STRING:
                 if buy_date == None:
-                    await message.reply_text(f"ʏᴏᴜ ᴄᴀɴ'ᴛ ᴜᴘʟᴏᴀᴅ ᴍᴏʀᴇ ᴛʜᴇɴ {humanbytes(limit)} ᴜꜱᴇᴅ ᴅᴀɪʟʏ ʟɪᴍɪᴛ {humanbytes(used)} ", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘɢʀᴀᴅᴇ 💰💳", callback_data="upgrade")]]))
+                    await message.reply_text(
+                        caption=script.DLIMIT_TEXT.format(humanbytes(limit), humanbytes(used)),
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                [
+                                    InlineKeyboardButton("Upgrade 💳", callback_data="upgrade")
+                                ]
+                            ]
+                        )
+                    )
                     return
                 pre_check = check_expi(buy_date)
                 if pre_check == True:
-                    await message.reply_text(f"""ᴡʜᴀᴛ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴍᴇ ᴛᴏ ᴅᴏ ᴡɪᴛʜ ᴛʜɪꜱ ꜰɪʟᴇ?\n**ꜰɪʟᴇ ɴᴀᴍᴇ** :- `{filename}`\n\n**ꜰɪʟᴇ ꜱɪᴢᴇ** :- {humanize.naturalsize(file.file_size)}\n**ᴅᴄ ɪᴅ** :- {dcid}""", reply_to_message_id=message.id, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📝 ʀᴇɴᴀᴍᴇ", callback_data="rename"), InlineKeyboardButton("⏳ ᴄᴀɴᴄᴇʟ", callback_data="cancel")]]))
+                    await message.reply_text(
+                        caption=script.RENAME_TEXT.format(filename, humanize.naturalsize(file.file_size), dcid),
+                        reply_to_message_id=message.id,
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                [
+                                    InlineKeyboardButton("📝 Rename", callback_data="rename"),
+                                    InlineKeyboardButton("⏳ Cancel", callback_data="cancel")
+                                ]
+                            ]
+                        )
+                    )
                     total_rename(int(botid), prrename)
                     total_size(int(botid), prsize, file.file_size)
                 else:
                     uploadlimit(message.from_user.id, 16384000000)
                     usertype(message.from_user.id, "Free")
-                    await message.reply_text(f'ʏᴏᴜʀ ᴘʟᴀɴ ᴇxᴘɪʀᴇᴅ ᴏɴ {buy_date}', quote=True)
+                    await message.reply_text(caption=script.EXP_TEXT.format(buy_date), quote=True)
                     return
             else:
-                await message.reply_text("ᴄᴀɴ'ᴛ ᴜᴘʟᴏᴀᴅ ꜰɪʟᴇꜱ ʙɪɢɢᴇʀ ᴛʜᴀɴ 2ɢʙ")
+                await message.reply_text(caption=script.GB_TEXT)
                 return
         else:
             if buy_date:
@@ -343,16 +384,16 @@ async def send_doc(client, message):
             total_rename(int(botid), prrename)
             total_size(int(botid), prsize, file.file_size)
             await message.reply_text(
-                f"""ᴡʜᴀᴛ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴍᴇ ᴛᴏ ᴅᴏ ᴡɪᴛʜ ᴛʜɪꜱ ꜰɪʟᴇ?\n**ꜰɪʟᴇ ɴᴀᴍᴇ** :- `{filename}`\n\n**ꜰɪʟᴇ ꜱɪᴢᴇ** :- {filesize}\n**ᴅᴄ ɪᴅ** :- {dcid}""", 
-                reply_to_message_id=message.id, 
+                caption=script.RENAME_TEXT.format(filename, filesize, dcid),
+                reply_to_message_id=message.id,
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("📝 ʀᴇɴᴀᴍᴇ", callback_data="rename"),
-                            InlineKeyboardButton("⏳ ᴄᴀɴᴄᴇʟ", callback_data="cancel")
+                            InlineKeyboardButton("📝 Rename", callback_data="rename"),
+                            InlineKeyboardButton("⏳ Cancel", callback_data="cancel")
                         ]
                     ]
                 )
             )
 
-	    
+
