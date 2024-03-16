@@ -1,25 +1,6 @@
 import random
 
 class script(object):
-    START_TEXT = """Hey! {},\nWelcome to rename bot"""
-    
-    SOURCE_TEXT = """<b>ɴᴏᴛᴇ:</b>
-- Source Project is Not An open Source"""
-
-    RENDER_TEXT = f"""<b>ɴᴏᴛᴇ:</b>
- 🌐 SYSTEM STATUS 🌐
-
-📊 RAM: {"●" * random.randint(0, 5) + "○" * (5 - random.randint(0, 5))}
-⚙️ CPU: {"●" * random.randint(0, 5) + "○" * (5 - random.randint(0, 5))}
-📈 Data: {"●" * random.randint(0, 5) + "○" * (5 - random.randint(0, 5))}
-
-{"●" * random.randint(0, 2) + "○" * (2 - random.randint(0, 2))}
-
-v[2.3.4] stable"""
-
-    import random
-
-class Script:
     START_TEXT = """Hey! {},\nWelcome to the rename bot"""
     SOURCE_TEXT = """<b>Note:</b>\n- Source Project is Not An open Source"""
     RENDER_TEXT = f"""<b>ɴᴏᴛᴇ:</b>
@@ -32,8 +13,8 @@ class Script:
 {"●" * random.randint(0, 2) + "○" * (2 - random.randint(0, 2))}
 
 v[2.3.4] stable"""
-    HELP_TEXT = """𝙷𝙴𝚈 {}\nUpdated Help Text."""
-    ABOUT_TEXT = """𝙷𝙴𝚈 {}\nUpdated About Text."""
+    HELP_TEXT = """𝙷𝙴𝚈\nUpdated Help Text."""
+    ABOUT_TEXT = """𝙷𝙴𝚈\nUpdated About Text."""
     THUMBNAIL_TEXT = """<b>Note:</b>\n🌌How to Set Thumbnail\n\nSend any photo to me, and I will save it automatically.\n/delthumb : Use this command to delete old thumbnail. \n/viewthumb : Use this command to view your current thumbnail."""
     CAPTION_TEXT = """<b>Note:</b>\n📝 How to Set Caption\n\n/set_caption Set a custom caption for your content.\n/see_caption: To view your custom caption.\n/delete_caption: Remove your custom caption from my DB."""
     WONX_TEXT = """ʏᴏᴜʀ ꜰʀɪᴇɴᴅ ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴜꜱɪɴɢ ᴏᴜʀ ʙᴏᴛ"""
