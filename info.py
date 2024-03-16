@@ -32,5 +32,6 @@ DATABASE_URL = environ.get("DATABASE_URL", "")
 # Channel and groups
 CHANNEL = environ.get('CHANNEL', "")
 LOG_CHANNEL = environ.get('LOG_CHANNEL', "")
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', "")
+UPDATE_CHANNEL = environ.get('UPDATE_CHANNEL', "https://t.me/iPepkornUpdate")
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', "https://t.me/iPepkornSupport")
 PORT = int(environ.get("PORT", "8080"))
