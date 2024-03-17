@@ -41,11 +41,12 @@ async def rename(bot, update):
 
 @Client.on_callback_query(filters.regex('default'))
 async def default(client, message):
-    date_fa = str(message.message.date)
+    message_date = message.message.date  # Accessing the date from the associated message
+    date_fa = str(message_date)
     pattern = '%Y-%m-%d %H:%M:%S'
     date = int(time.mktime(time.strptime(date_fa, pattern)))
-    chat_id = message.chat.id
-    media = await client.get_messages(message.chat.id, message.reply_to_message.message_id)
+    chat_id = message.message.chat.id  # Accessing chat ID from the associated message
+    media = await client.get_messages(message.message.chat.id, message.message.reply_to_message.message_id)  # Using message.message to access the associated message
     file = media.document or media.video or media.audio
     filename = file.file_name
     await defaultfunc(filename)
