@@ -1,7 +1,7 @@
 import math
 import time
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
+from info import *
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
@@ -19,7 +19,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         filled_blocks = math.floor(percentage / 5)
         empty_blocks = 20 - filled_blocks
 
-        progress_bar = "█" * filled_blocks + "░" * empty_blocks
+        progress_bar = "■" * filled_blocks + "□" * empty_blocks
 
         tmp = PROGRESS_BAR.format(
             round(percentage, 2),
@@ -30,13 +30,19 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
             progress_bar
         )
 
-        follow_button = InlineKeyboardButton("🦋 Follow 🦋", url="https://t.me/CinemaVenoOfficial")
-        cancel_button = InlineKeyboardButton("⨳ C L Ф S Ξ ⨳", callback_data="cancel")
+        button = (
+            [
+                [
+                    InlineKeyboardButton("📢 ꜰᴏʟʟᴏᴡ 📢", url=PROMO_CHANNAL)
+                    InlineKeyboardButton("⛔ ᴄᴀɴᴄᴇʟ ⛔", callback_data="cancel")
+                ]
+            ]
+        )
 
         try:
             await message.edit(
                 text=f"{ud_type}\n\n{tmp}",
-                reply_markup=InlineKeyboardMarkup([[follow_button], [cancel_button]])
+                reply_markup=InlineKeyboardMarkup(button)
             )
         except Exception:
             pass
@@ -73,14 +79,9 @@ def TimeFormatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-PROGRESS_BAR = """\
-╭━〔PROGRESS BAR〕━◉
-┃╭━━━━━━━━━━━━━━◉
-┃┣⪼ {5} 
-┃┣⪼ 🗂️ : {1} | {2}
-┃┣⪼ ⏳️ : {0}%
-┃┣⪼ 🚀 : {3}/s
-┃┣⪼ ⏱️ : {4}
-┃╰━━━━━━━━━━━━━◉
-╰━━━━━━━━━━━━━━━◉ """
-
+PROGRESS_BAR = """
+● {5} 
+● 🗂️ : {1} | {2}
+● ⏳️ : {0}%
+● 🚀 : {3}/s
+● ⏱️ : {4}"""
