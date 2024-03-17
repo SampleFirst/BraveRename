@@ -99,7 +99,7 @@ async def refunc(client, message):
         print(f"error: {e}")
 
 
-async def defoultfunc(message):
+async def defaultfunc(message):
     try:
         new_name = message
         await message.delete()
