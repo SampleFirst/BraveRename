@@ -48,8 +48,7 @@ async def default(bot, update):
     id = update.message.reply_to_message_id
     await update.message.delete()
     await update.message.reply_text(
-        id,
-        reply_markup
+        id
     )
     dateupdate(chat_id, date)
     
