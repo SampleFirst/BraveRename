@@ -48,7 +48,7 @@ async def refunc(client, message):
                         ]
                     )
                 await message.reply_text(
-                    text=script.SELECT_FILETYPE_TEXT.format(out_filename)
+                    text=script.SELECT_FILETYPE_TEXT.format(out_filename),
                     reply_to_message_id=mg_id, 
                     reply_markup=markup
                 )
@@ -91,7 +91,7 @@ async def refunc(client, message):
                         ]
                     )
                 await message.reply_text(
-                    text=script.SELECT_FILETYPE_TEXT.format(out_filename)
+                    text=script.SELECT_FILETYPE_TEXT.format(out_filename),
                     reply_to_message_id=mg_id, 
                     reply_markup=markup
                 )
@@ -142,7 +142,7 @@ async def defoultfunc(client, message):
                     ]
                 )
             await message.reply_text(
-                text=script.SELECT_FILETYPE_TEXT.format(out_filename)
+                text=script.SELECT_FILETYPE_TEXT.format(out_filename),
                 reply_to_message_id=mg_id, 
                 reply_markup=markup
             )
@@ -185,7 +185,7 @@ async def defoultfunc(client, message):
                     ]
                 )
             await message.reply_text(
-                text=script.SELECT_FILETYPE_TEXT.format(out_filename)
+                text=script.SELECT_FILETYPE_TEXT.format(out_filename),
                 reply_to_message_id=mg_id, 
                 reply_markup=markup
             )
