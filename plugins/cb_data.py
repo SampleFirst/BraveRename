@@ -45,9 +45,10 @@ async def default(bot, update):
     pattern = '%Y-%m-%d %H:%M:%S'
     date = int(time.mktime(time.strptime(date_fa, pattern)))
     chat_id = update.message.chat.id
-    id = update.message.reply_to_message_id
-    await update.message.delete()
-    await defoultfunc()
+    media = await client.get_messages(message.chat.id, message.reply_to_message.id)
+    file = media.reply_to_message.document or media.reply_to_message.video or media.reply_to_message.audio
+    filename = file.file_name
+    await defoultfunc(filename)
     dateupdate(chat_id, date)
     
 @Client.on_callback_query(filters.regex("doc"))
