@@ -36,12 +36,12 @@ async def start(client, message):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
-                        InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
+                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL)),
+                        InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=(SUPPORT_CHAT)),
                     ],
                     [
-                        InlineKeyboardButton("Help", callback_data='help'),
-                        InlineKeyboardButton("About", callback_data='about')
+                        InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
+                        InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
                     ]
                 ]
             )
@@ -57,12 +57,12 @@ async def start(client, message):
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
-                                InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
+                                InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL)),
+                                InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=(SUPPORT_CHAT)),
                             ],
                             [
-                                InlineKeyboardButton("Help", callback_data='help'),
-                                InlineKeyboardButton("About", callback_data='about')
+                                InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
+                                InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
                             ]
                         ]
                     )
@@ -81,10 +81,10 @@ async def start(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL))
+                            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL))
                         ],
                         [
-                            InlineKeyboardButton("Help", callback_data='help')
+                            InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
                         ]
                     ]
                 )
@@ -115,12 +115,12 @@ async def help_callback_handler(client, query):
 
     buttons = [
         [
-            InlineKeyboardButton('Thumbnail', callback_data='thumbnail'),
-            InlineKeyboardButton('Caption', callback_data='caption')
+            InlineKeyboardButton("ᴛʜᴜᴍʙɴᴀɪʟ", callback_data='thumbnail'),
+            InlineKeyboardButton("ᴄᴀᴘᴛɪᴏɴ", callback_data='caption')
         ],
         [
-            InlineKeyboardButton('Home', callback_data='home'),
-            InlineKeyboardButton('About', callback_data='about')
+            InlineKeyboardButton("ʜᴏᴍᴇ", callback_data='home'),
+            InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -148,12 +148,12 @@ async def about_callback_handler(client, query):
 
     buttons = [
         [
-            InlineKeyboardButton('Thumbnail', callback_data='thumbnail'),
-            InlineKeyboardButton('Caption', callback_data='caption')
+            InlineKeyboardButton("ᴛʜᴜᴍʙɴᴀɪʟ", callback_data='thumbnail'),
+            InlineKeyboardButton("ᴄᴀᴘᴛɪᴏɴ", callback_data='caption')
         ],
         [
-            InlineKeyboardButton('Home', callback_data='home'),
-            InlineKeyboardButton('Help', callback_data='help')
+            InlineKeyboardButton("ʜᴏᴍᴇ", callback_data='home'),
+            InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -168,7 +168,7 @@ async def about_callback_handler(client, query):
 async def caption_callback_handler(client, query):
     buttons = [
         [
-            InlineKeyboardButton('Back', callback_data='help')
+            InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -183,7 +183,7 @@ async def caption_callback_handler(client, query):
 async def thumbnail_callback_handler(client, query):
     buttons = [
         [
-            InlineKeyboardButton('Back', callback_data='help')
+            InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -199,12 +199,12 @@ async def home_callback_handler(client, query):
     home_text = script.START_TEXT.format(query.from_user.mention)
     buttons = [
         [
-            InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
-            InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
+            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL)),
+            InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=(SUPPORT_CHAT)),
         ],
         [
-            InlineKeyboardButton("Help", callback_data='help'),
-            InlineKeyboardButton("About", callback_data='about')
+            InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
+            InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -220,7 +220,7 @@ async def render_callback_handler(client, query):
 async def source_callback_handler(client, query):
     buttons = [
         [
-            InlineKeyboardButton('Back', callback_data='help')
+            InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -247,7 +247,7 @@ async def send_doc(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL))
+                            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL))
                         ]
                     ]
                 )
@@ -258,7 +258,7 @@ async def send_doc(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("🔖 Restrict User ( **pm** ) 🔖", callback_data="ceasepower")
+                            InlineKeyboardButton("🔖 ʀᴇꜱᴛʀɪᴄᴛ ᴜꜱᴇʀ ( **pm** )", callback_data="ceasepower")
                         ]
                     ]
                 )
@@ -282,12 +282,12 @@ async def send_doc(client, message):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Update Channel", url=(UPDATE_CHANNEL)),
-                        InlineKeyboardButton("Support Group", url=(SUPPORT_CHAT)),
+                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL)),
+                        InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=(SUPPORT_CHAT)),
                     ],
                     [
-                        InlineKeyboardButton("Help", callback_data='help'),
-                        InlineKeyboardButton("About", callback_data='about')
+                        InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
+                        InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
                     ]
                 ]
             )
@@ -328,7 +328,7 @@ async def send_doc(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("Upgrade 💳", callback_data="upgrade")
+                            InlineKeyboardButton("ᴜᴘɢʀᴀᴅᴇ 💳", callback_data="upgrade")
                         ]
                     ]
                 )
@@ -343,7 +343,7 @@ async def send_doc(client, message):
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
-                                    InlineKeyboardButton("Upgrade 💳", callback_data="upgrade")
+                                    InlineKeyboardButton("ᴜᴘɢʀᴀᴅᴇ 💳", callback_data="upgrade")
                                 ]
                             ]
                         )
@@ -352,13 +352,13 @@ async def send_doc(client, message):
                 pre_check = check_expi(buy_date)
                 if pre_check == True:
                     await message.reply_text(
-                        text=script.RENAME_TEXT.format(filename, humanize.naturalsize(file.file_size), dcid),
+                        text=script.RENAME_TEXT.format(a=filename, b=humanize.naturalsize(file.file_size), c=dcid),
                         reply_to_message_id=message.id,
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
-                                    InlineKeyboardButton("📝 Rename", callback_data="rename"),
-                                    InlineKeyboardButton("⏳ Cancel", callback_data="cancel")
+                                    InlineKeyboardButton("📝 ʀᴇɴᴀᴍᴇ", callback_data="rename"),
+                                    InlineKeyboardButton("⏳ ᴄᴀɴᴄᴇʟ", callback_data="cancel")
                                 ]
                             ]
                         )
@@ -384,13 +384,13 @@ async def send_doc(client, message):
             total_rename(int(botid), prrename)
             total_size(int(botid), prsize, file.file_size)
             await message.reply_text(
-                text=script.RENAME_TEXT.format(filename, filesize, dcid),
+                text=script.RENAME_TEXT.format(a=filename, b=filesize, c=dcid),
                 reply_to_message_id=message.id,
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("📝 Rename", callback_data="rename"),
-                            InlineKeyboardButton("⏳ Cancel", callback_data="cancel")
+                            InlineKeyboardButton("📝 ʀᴇɴᴀᴍᴇ", callback_data="rename"),
+                            InlineKeyboardButton("⏳ ᴄᴀɴᴄᴇʟ", callback_data="cancel")
                         ]
                     ]
                 )
