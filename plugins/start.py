@@ -166,6 +166,18 @@ async def about_callback_handler(client, query):
 
 @Client.on_callback_query(filters.regex(r"^caption$"))
 async def caption_callback_handler(client, query):
+    loading_placeholder = "◌◌◌"
+    await query.message.edit_text(
+        text=loading_placeholder,
+        parse_mode=enums.ParseMode.HTML
+    )
+    for _ in range(3):
+        await asyncio.sleep(0.2)  # Simulating loading delay
+        loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
     buttons = [
         [
             InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
@@ -181,6 +193,18 @@ async def caption_callback_handler(client, query):
 
 @Client.on_callback_query(filters.regex(r"^thumbnail$"))
 async def thumbnail_callback_handler(client, query):
+    loading_placeholder = "◌◌◌"
+    await query.message.edit_text(
+        text=loading_placeholder,
+        parse_mode=enums.ParseMode.HTML
+    )
+    for _ in range(3):
+        await asyncio.sleep(0.2)  # Simulating loading delay
+        loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
     buttons = [
         [
             InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
@@ -196,6 +220,18 @@ async def thumbnail_callback_handler(client, query):
 
 @Client.on_callback_query(filters.regex(r"^home$"))
 async def home_callback_handler(client, query):
+    loading_placeholder = "◌◌◌"
+    await query.message.edit_text(
+        text=loading_placeholder,
+        parse_mode=enums.ParseMode.HTML
+    )
+    for _ in range(3):
+        await asyncio.sleep(0.2)  # Simulating loading delay
+        loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
     home_text = script.START_TEXT.format(query.from_user.mention)
     buttons = [
         [
@@ -213,11 +249,35 @@ async def home_callback_handler(client, query):
 
 @Client.on_callback_query(filters.regex(r"^render$"))
 async def render_callback_handler(client, query):
+    loading_placeholder = "◌◌◌"
+    await query.message.edit_text(
+        text=loading_placeholder,
+        parse_mode=enums.ParseMode.HTML
+    )
+    for _ in range(3):
+        await asyncio.sleep(0.2)  # Simulating loading delay
+        loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
     await query.answer(text=script.RENDER_TEXT, show_alert=True)
 
 
 @Client.on_callback_query(filters.regex(r"^source$"))
 async def source_callback_handler(client, query):
+    loading_placeholder = "◌◌◌"
+    await query.message.edit_text(
+        text=loading_placeholder,
+        parse_mode=enums.ParseMode.HTML
+    )
+    for _ in range(3):
+        await asyncio.sleep(0.2)  # Simulating loading delay
+        loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
     buttons = [
         [
             InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
@@ -358,7 +418,10 @@ async def send_doc(client, message):
                             [
                                 [
                                     InlineKeyboardButton("📝 ʀᴇɴᴀᴍᴇ", callback_data="rename"),
-                                    InlineKeyboardButton("⏳ ᴄᴀɴᴄᴇʟ", callback_data="cancel")
+                                    InlineKeyboardButton("♻️ ᴅᴇꜰᴀᴜʟᴛ", callback_data="default")
+                                ],
+                                [
+                                    InlineKeyboardButton("❌ ᴄᴀɴᴄᴇʟ ❌", callback_data="cancel")
                                 ]
                             ]
                         )
@@ -390,10 +453,12 @@ async def send_doc(client, message):
                     [
                         [
                             InlineKeyboardButton("📝 ʀᴇɴᴀᴍᴇ", callback_data="rename"),
-                            InlineKeyboardButton("⏳ ᴄᴀɴᴄᴇʟ", callback_data="cancel")
+                            InlineKeyboardButton("♻️ ᴅᴇꜰᴀᴜʟᴛ", callback_data="default")
+                        ],
+                        [
+                            InlineKeyboardButton("❌ ᴄᴀɴᴄᴇʟ ❌", callback_data="cancel")
                         ]
                     ]
                 )
             )
-
-
+            
