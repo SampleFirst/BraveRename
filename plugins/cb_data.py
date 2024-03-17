@@ -14,7 +14,7 @@ from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
 import os
 from info import *
-
+from plugins.filedetect import defoultfunc
 
 @Client.on_callback_query(filters.regex('cancel'))
 async def cancel(bot, update):
