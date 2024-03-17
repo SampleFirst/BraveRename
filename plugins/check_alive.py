@@ -16,11 +16,12 @@ def get_bot_runtime():
 
 @Client.on_message(filters.command("alive"))
 async def check_alive(_, message):
+    user = message.from_user.mention
     elapsed_time_formatted = time.strftime("%H:%M:%S", time.gmtime(get_bot_runtime()))
     bot_version = get_bot_version()
     await message.reply_photo(
         photo="https://graph.org/file/4c66eed05443c09179a2e.jpg",
-        caption=script.ALIVE_TEXT.format(message.from_user.mention, bot_version, elapsed_time_formatted),
+        caption=script.ALIVE_TEXT.format(user, bot_version, elapsed_time_formatted),
         quote=True 
     )
     
