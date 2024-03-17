@@ -324,7 +324,7 @@ async def send_doc(client, message):
         remain = limit - used
         if remain < int(file.file_size):
             await message.reply_text(
-                caption=script.EXP_QUOTA_TEXT.format(humanbytes(limit), humanbytes(file.file_size), humanbytes(used), humanbytes(remain)),
+                text=script.EXP_QUOTA_TEXT.format(humanbytes(limit), humanbytes(file.file_size), humanbytes(used), humanbytes(remain)),
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -339,7 +339,7 @@ async def send_doc(client, message):
             if STRING:
                 if buy_date == None:
                     await message.reply_text(
-                        caption=script.DLIMIT_TEXT.format(humanbytes(limit), humanbytes(used)),
+                        text=script.DLIMIT_TEXT.format(humanbytes(limit), humanbytes(used)),
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
@@ -352,7 +352,7 @@ async def send_doc(client, message):
                 pre_check = check_expi(buy_date)
                 if pre_check == True:
                     await message.reply_text(
-                        caption=script.RENAME_TEXT.format(filename, humanize.naturalsize(file.file_size), dcid),
+                        text=script.RENAME_TEXT.format(filename, humanize.naturalsize(file.file_size), dcid),
                         reply_to_message_id=message.id,
                         reply_markup=InlineKeyboardMarkup(
                             [
@@ -384,7 +384,7 @@ async def send_doc(client, message):
             total_rename(int(botid), prrename)
             total_size(int(botid), prsize, file.file_size)
             await message.reply_text(
-                caption=script.RENAME_TEXT.format(filename, filesize, dcid),
+                text=script.RENAME_TEXT.format(filename, filesize, dcid),
                 reply_to_message_id=message.id,
                 reply_markup=InlineKeyboardMarkup(
                     [
