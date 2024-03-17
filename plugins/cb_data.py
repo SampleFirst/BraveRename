@@ -40,15 +40,15 @@ async def rename(bot, update):
     dateupdate(chat_id, date)
 
 @Client.on_callback_query(filters.regex('default'))
-async def default(client, update):
-    date_fa = str(update.message.date)
+async def default(client, message):
+    date_fa = str(message.date)
     pattern = '%Y-%m-%d %H:%M:%S'
     date = int(time.mktime(time.strptime(date_fa, pattern)))
-    chat_id = update.message.chat.id
-    media = await client.get_messages(message.chat.id, message.reply_to_message.id)
-    file = media.reply_to_message.document or media.reply_to_message.video or media.reply_to_message.audio
+    chat_id = message.chat.id
+    media = await client.get_messages(message.chat.id, message.reply_to_message.message_id)
+    file = media.document or media.video or media.audio
     filename = file.file_name
-    await defoultfunc(filename)
+    await defaultfunc(filename)
     dateupdate(chat_id, date)
     
 @Client.on_callback_query(filters.regex("doc"))
