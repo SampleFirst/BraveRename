@@ -33,7 +33,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         button = (
             [
                 [
-                    InlineKeyboardButton("📢 ꜰᴏʟʟᴏᴡ 📢", url=PROMO_CHANNAL)
+                    InlineKeyboardButton("📢 ꜰᴏʟʟᴏᴡ 📢", url=(PROMO_CHANNAL))
                     InlineKeyboardButton("⛔ ᴄᴀɴᴄᴇʟ ⛔", callback_data="cancel")
                 ]
             ]
