@@ -27,4 +27,8 @@ v[2.3.4] stable"""
     RENAME_TEXT = """ᴡʜᴀᴛ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴍᴇ ᴛᴏ ᴅᴏ ᴡɪᴛʜ ᴛʜɪꜱ ꜰɪʟᴇ?\n\n**File Name**: `{a}`\n**File Size**: {b}\n**DC ID**: {c}"""
     EXP_TEXT = """ʏᴏᴜʀ ᴘʟᴀɴ ᴇxᴘɪʀᴇᴅ ᴏɴ {buy_date}"""
     GB_TEXT = """ᴄᴀɴ'ᴛ ᴜᴘʟᴏᴀᴅ ꜰɪʟᴇꜱ ʙɪɢɢᴇʀ ᴛʜᴀɴ 2ɢʙ"""
-    
+    ALIVE_TEXT = """
+ʜᴇʟʟᴏ 👋, {message.from_user.mention}\n
+ᴠᴇʀꜱɪᴏɴ: ♻️ {bot_version}\n
+ʙᴏᴛ ʀᴜɴᴛɪᴍᴇ: ⏳ {elapsed_time_formatted}"""
+
