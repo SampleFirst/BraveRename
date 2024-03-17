@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.enums import MessageMediaType
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
-
+from Script import script 
 
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client, message):
@@ -25,8 +25,8 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("📁 Document", callback_data="doc"),
-                            InlineKeyboardButton("🎥 Video", callback_data="vid")
+                            InlineKeyboardButton("📁 ᴅᴏᴄᴜᴍᴇɴᴛ", callback_data="doc"),
+                            InlineKeyboardButton("🎥 ᴠɪᴅᴇᴏ", callback_data="vid")
                         ]   
                     ]
                 )
@@ -34,8 +34,8 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="doc"), 
-                                InlineKeyboardButton("🎵 audio", callback_data="aud")
+                                InlineKeyboardButton("📁 ᴅᴏᴄᴜᴍᴇɴᴛ", callback_data="doc"), 
+                                InlineKeyboardButton("🎵 ᴀᴜᴅɪᴏ", callback_data="aud")
                             ]
                         ]
                     )
@@ -43,11 +43,15 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="doc")
+                                InlineKeyboardButton("📁 ᴅᴏᴄᴜᴍᴇɴᴛ", callback_data="doc")
                             ]
                         ]
                     )
-                await message.reply_text(f"**Select the output file type**\n\n**New Name** :- {out_filename}", reply_to_message_id=mg_id, reply_markup=markup)
+                await message.reply_text(
+                    text=script.SELECT_FILETYPE_TEXT.format(out_filename)
+                    reply_to_message_id=mg_id, 
+                    reply_markup=markup
+                )
 
             except:
                 try:
@@ -57,15 +61,15 @@ async def refunc(client, message):
                     print(f"out name: {out_filename}")
                 except:
                     await message.reply_to_message.delete()
-                    await message.reply_text("**Error** :  No  Extension in File, Not Supporting", reply_to_message_id=mg_id)
+                    await message.reply_text("**ᴇʀʀᴏʀ** : ɴᴏ ᴇxᴛᴇɴꜱɪᴏɴ ɪɴ ꜰɪʟᴇ, ɴᴏᴛ ꜱᴜᴘᴘᴏʀᴛɪɴɢ", reply_to_message_id=mg_id)
                     return
                 await message.reply_to_message.delete()
                 if mime == "video":
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="doc"), 
-                                InlineKeyboardButton("🎥 Video", callback_data="vid")
+                                InlineKeyboardButton("📁 ᴅᴏᴄᴜᴍᴇɴᴛ", callback_data="doc"), 
+                                InlineKeyboardButton("🎥 ᴠɪᴅᴇᴏ", callback_data="vid")
                             ]
                         ]
                     )
@@ -73,8 +77,8 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="doc"), 
-                                InlineKeyboardButton("🎵 audio", callback_data="aud")
+                                InlineKeyboardButton("📁 ᴅᴏᴄᴜᴍᴇɴᴛ", callback_data="doc"), 
+                                InlineKeyboardButton("🎵 ᴀᴜᴅɪᴏ", callback_data="aud")
                             ]
                         ]
                     )
@@ -82,12 +86,12 @@ async def refunc(client, message):
                     markup = InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📁 Document", callback_data="doc")
+                                InlineKeyboardButton("📁 ᴅᴏᴄᴜᴍᴇɴᴛ", callback_data="doc")
                             ]
                         ]
                     )
                 await message.reply_text(
-                    f"**Select the output file type**\n\n**New Name ->** :- {out_filename}",
+                    text=script.SELECT_FILETYPE_TEXT.format(out_filename)
                     reply_to_message_id=mg_id, 
                     reply_markup=markup
                 )
