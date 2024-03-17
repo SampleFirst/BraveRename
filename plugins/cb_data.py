@@ -33,7 +33,7 @@ async def rename(bot, update):
     id = update.message.reply_to_message_id
     await update.message.delete()
     await update.message.reply_text(
-        f"Enter New File name...", 
+        f"ᴇɴᴛᴇʀ ɴᴇᴡ ꜰɪʟᴇ ɴᴀᴍᴇ...",
         reply_to_message_id=id,
         reply_markup=ForceReply(True)
     )
@@ -50,7 +50,7 @@ async def doc(bot, update):
     file_path = f"downloads/{new_filename}"
     message = update.message.reply_to_message
     file = message.document or message.video or message.audio
-    ms = await update.message.edit("\nBuilding Metadata...")
+    ms = await update.message.edit("\nʙᴜɪʟᴅɪɴɢ ᴍᴇᴛᴀᴅᴀᴛᴀ...")
     used_limit(update.from_user.id, file.file_size)
     c_time = time.time()
     total_used = used + int(file.file_size)
@@ -94,7 +94,7 @@ async def doc(bot, update):
 
     value = 2090000000
     if value < file.file_size:
-        await ms.edit("Preparing to receive file...")
+        await ms.edit("ᴘʀᴇᴘᴀʀɪɴɢ ᴛᴏ ʀᴇᴄᴇɪᴠᴇ ꜰɪʟᴇ...")
         try:
             filw = await bot.send_document(LOG_CHANNEL, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
@@ -117,7 +117,7 @@ async def doc(bot, update):
             except:
                 return
     else:
-        await ms.edit("Preparing to receive file...")
+        await ms.edit("ᴘʀᴇᴘᴀʀɪɴɢ ᴛᴏ ʀᴇᴄᴇɪᴠᴇ ꜰɪʟᴇ...")
         c_time = time.time()
         try:
             await bot.send_document(update.from_user.id, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
@@ -195,7 +195,7 @@ async def vid(bot, update):
 
     value = 2090000000
     if value < file.file_size:
-        await ms.edit("Preparing to receive file...")
+        await ms.edit("ᴘʀᴇᴘᴀʀɪɴɢ ᴛᴏ ʀᴇᴄᴇɪᴠᴇ ꜰɪʟᴇ...")
         try:
             filw = await bot.send_video(LOG_CHANNEL, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("**⎝⎝✧ ʀᴇᴄɪᴠɪɴɢ ꜰɪʟᴇ ꜰʀᴏᴍ ᴢᴏʀᴏ ꜱᴇʀᴠᴇʀ ✧⎠⎠**",  ms, c_time))
             from_chat = filw.chat.id
