@@ -41,7 +41,7 @@ async def rename(bot, update):
 
 @Client.on_callback_query(filters.regex('default'))
 async def default(client, message):
-    date_fa = str(message.date)
+    date_fa = str(message.message.date)
     pattern = '%Y-%m-%d %H:%M:%S'
     date = int(time.mktime(time.strptime(date_fa, pattern)))
     chat_id = message.chat.id
