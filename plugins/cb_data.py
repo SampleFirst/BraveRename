@@ -47,9 +47,7 @@ async def default(bot, update):
     chat_id = update.message.chat.id
     id = update.message.reply_to_message_id
     await update.message.delete()
-    await update.message.reply_text(
-        id
-    )
+    await defoultfunc()
     dateupdate(chat_id, date)
     
 @Client.on_callback_query(filters.regex("doc"))
