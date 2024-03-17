@@ -99,9 +99,9 @@ async def refunc(client, message):
         print(f"error: {e}")
 
 
-async def defoultfunc(client, message):
+async def defoultfunc(message):
     try:
-        new_name = message.text
+        new_name = message
         await message.delete()
         media = await client.get_messages(message.chat.id, message.reply_to_message.id)
         file = media.reply_to_message.document or media.reply_to_message.video or media.reply_to_message.audio
