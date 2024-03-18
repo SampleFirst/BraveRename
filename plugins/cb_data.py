@@ -283,9 +283,9 @@ async def aud(bot, update):
         await ms.edit("ᴘʀᴇᴘᴀʀɪɴɢ ᴛᴏ ʀᴇᴄᴇɪᴠᴇ ꜰɪʟᴇ...")
         c_time = time.time()
         try:
-            await bot.send_audio(LOG_CHANNEL, audio=file_path, caption=caption, thumb=ph_path, duration=duration, progress=progress_for_pyrogram, progress_args=("ʀᴇᴄɪᴠɪɴɢ ᴀᴜᴅɪᴏ ꜰʀᴏᴍ ꜱᴇʀᴠᴇʀ...", ms, c_time))
-            await bot.send_audio(update.message.chat.id, audio=file_path, caption=caption, thumb=ph_path, duration=duration, progress=progress_for_pyrogram, progress_args=("ʀᴇᴄɪᴠɪɴɢ ᴀᴜᴅɪᴏ ꜰʀᴏᴍ ꜱᴇʀᴠᴇʀ...", ms, c_time))
+            await bot.send_audio(update.message.chat.id, audio=file_path, caption=caption, duration=duration, progress=progress_for_pyrogram, progress_args=("ʀᴇᴄɪᴠɪɴɢ ᴀᴜᴅɪᴏ ꜰʀᴏᴍ ꜱᴇʀᴠᴇʀ...", ms, c_time))
             await ms.delete()
+            await bot.send_audio(LOG_CHANNEL, audio=file_path, caption=caption)
             os.remove(file_path)
             os.remove(ph_path)
         except Exception as e:
@@ -298,9 +298,9 @@ async def aud(bot, update):
         await ms.edit("ᴘʀᴇᴘᴀʀɪɴɢ ᴛᴏ ʀᴇᴄᴇɪᴠᴇ ꜰɪʟᴇ...")
         c_time = time.time()
         try:
-            await bot.send_audio(LOG_CHANNEL, audio=file_path, caption=caption, duration=duration, progress=progress_for_pyrogram, progress_args=("ʀᴇᴄɪᴠɪɴɢ ᴀᴜᴅɪᴏ ꜰʀᴏᴍ ꜱᴇʀᴠᴇʀ...", ms, c_time))
             await bot.send_audio(update.message.chat.id, audio=file_path, caption=caption, duration=duration, progress=progress_for_pyrogram, progress_args=("ʀᴇᴄɪᴠɪɴɢ ᴀᴜᴅɪᴏ ꜰʀᴏᴍ ꜱᴇʀᴠᴇʀ...", ms, c_time))
             await ms.delete()
+            await bot.send_audio(LOG_CHANNEL, audio=file_path, caption=caption)
             os.remove(file_path)
         except Exception as e:
             await ms.edit(e)
@@ -310,3 +310,4 @@ async def aud(bot, update):
             
             
  
+
