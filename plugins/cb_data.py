@@ -14,7 +14,7 @@ from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
 import os
 from info import *
-from plugins.filedetect import rename_file
+
 
 @Client.on_callback_query(filters.regex('cancel'))
 async def cancel(bot, update):
@@ -42,21 +42,7 @@ async def rename(bot, update):
     except Exception as e:
         print(f"error: {e}")
 
-@Client.on_callback_query(filters.regex('default'))
-async def default(bot, update):
-    try:
-        date_fa = str(update.message.date)
-        pattern = '%Y-%m-%d %H:%M:%S'
-        date = int(time.mktime(time.strptime(date_fa, pattern)))
-        chat_id = update.message.chat.id
-        id = update.message.reply_to_message_id
-        await update.message.delete()
-        await rename_file(bot, update)
-        dateupdate(chat_id, date)
-    except Exception as e:
-        print(f"error: {e}")
-    
-    
+
 @Client.on_callback_query(filters.regex("doc"))
 async def doc(bot, update):
     new_name = update.message.text
