@@ -12,7 +12,7 @@ async def refer(client, message):
     )
     await message.reply_photo(
         photo=https://telegra.ph/file/1f1e29702f6cb8fd157e3.jpg,
-        text="ʀᴇꜰᴇʀ ᴀɴᴅ ᴇᴀʀɴ ɢᴇᴛ 5ɢʙ ᴜᴘʟᴏᴀᴅ ʟɪᴍɪᴛ\nᴘᴇʀ ʀᴇꜰᴇʀ 5ɢʙ,
+        text="ʀᴇꜰᴇʀ ᴀɴᴅ ᴇᴀʀɴ ɢᴇᴛ 5ɢʙ ᴜᴘʟᴏᴀᴅ ʟɪᴍɪᴛ\nᴘᴇʀ ʀᴇꜰᴇʀ 5ɢʙ",
         reply_to_message_id=message.message_id, 
         reply_markup=reply_markup,
         quote=True
