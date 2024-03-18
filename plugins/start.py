@@ -32,7 +32,7 @@ async def start(client, message):
     except:
         await message.reply_photo(
             photo=PICS,
-            caption=script.START_TEXT.format(message.from_user.mention),
+            text=script.START_TEXT.format(message.from_user.mention),
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -53,7 +53,7 @@ async def start(client, message):
                 await client.send_message(id, script.WONX_TEXT)
                 await message.reply_photo(
                     photo=PICS,
-                    caption=script.START_TEXT.format(message.from_user.mention),
+                    text=script.START_TEXT.format(message.from_user.mention),
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -76,7 +76,7 @@ async def start(client, message):
             new_limit = limit + 10737418240
             uploadlimit(int(id), new_limit)
             await message.reply_text(
-                caption=script.START_TEXT.format(message.from_user.mention), 
+                text=script.START_TEXT.format(message.from_user.mention), 
                 reply_to_message_id=message.id,
                 reply_markup=InlineKeyboardMarkup(
                     [
@@ -302,7 +302,7 @@ async def send_doc(client, message):
             _newus = find_one(message.from_user.id)
             user = _newus["usertype"]
             await message.reply_text(
-                caption=script.SUB_TEXT.format(message.from_user.mention),
+                text=script.SUB_TEXT.format(message.from_user.mention),
                 reply_to_message_id=message.id,
                 reply_markup=InlineKeyboardMarkup(
                     [
@@ -314,7 +314,7 @@ async def send_doc(client, message):
             )
             await client.send_message(
                 LOG_CHANNEL,
-                caption=script.LOG_TEXT.format(user_id, message.from_user.mention, user),
+                text=script.LOG_TEXT.format(user_id, message.from_user.mention, user),
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -338,7 +338,7 @@ async def send_doc(client, message):
         user_type = user_deta["usertype"]
     except:
         await message.reply_text(
-            caption=script.START_TEXT.format(query.from_user.mention),
+            text=script.START_TEXT.format(query.from_user.mention),
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -364,7 +364,10 @@ async def send_doc(client, message):
     conversion = datetime.timedelta(seconds=left)
     ltime = str(conversion)
     if left > 0:
-        await message.reply_text(caption=script.FLOOD_TEXT.format(a=ltime), reply_to_message_id=message.id)
+        await message.reply_text(
+            text=script.FLOOD_TEXT.format(a=ltime), 
+            reply_to_message_id=message.id
+        )
     else:
         media = await client.get_messages(message.chat.id, message.id)
         file = media.document or media.video or media.audio
@@ -384,7 +387,7 @@ async def send_doc(client, message):
         remain = limit - used
         if remain < int(file.file_size):
             await message.reply_text(
-                text=script.EXP_QUOTA_TEXT.format(humanbytes(limit), humanbytes(file.file_size), humanbytes(used), humanbytes(remain)),
+                text=script.EXP_QUOTA_TEXT.format(a=humanbytes(limit), b=humanbytes(file.file_size), c=humanbytes(used), d=humanbytes(remain)),
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -399,7 +402,7 @@ async def send_doc(client, message):
             if STRING:
                 if buy_date == None:
                     await message.reply_text(
-                        text=script.DLIMIT_TEXT.format(humanbytes(limit), humanbytes(used)),
+                        text=script.DLIMIT_TEXT.format(a=humanbytes(limit), b=humanbytes(used)),
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
@@ -431,10 +434,15 @@ async def send_doc(client, message):
                 else:
                     uploadlimit(message.from_user.id, 16384000000)
                     usertype(message.from_user.id, "Free")
-                    await message.reply_text(caption=script.EXP_TEXT.format(buy_date), quote=True)
+                    await message.reply_text(
+                        text=script.EXP_TEXT.format(a=buy_date), 
+                        quote=True
+                    )
                     return
             else:
-                await message.reply_text(caption=script.GB_TEXT)
+                await message.reply_text(
+                    text=script.GB_TEXT
+                )
                 return
         else:
             if buy_date:
