@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from helper.database import *
+from helper.database import find, addcaption, delcaption
 
 
 @Client.on_message(filters.private & filters.command('set_caption'))
