@@ -51,7 +51,7 @@ async def default(bot, update):
         chat_id = update.message.chat.id
         id = update.message.reply_to_message_id
         await update.message.delete()
-        await rename_file()
+        await rename_file(bot, update)
         dateupdate(chat_id, date)
     except Exception as e:
         print(f"error: {e}")
