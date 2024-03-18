@@ -6,8 +6,14 @@ async def refer(client, message):
     reply_markup = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Share Your Link", url=f"https://t.me/share/url?url=https://t.me/Zoro_Renamer_bot?start={message.from_user.id}")
+                InlineKeyboardButton("⚡ ꜱʜᴀʀᴇ ʏᴏᴜʀ ʟɪɴᴋ", url=f"https://t.me/share/url?url=https://t.me/Zoro_Renamer_bot?start={message.from_user.id}")
             ]
         ]
     )
-    await message.reply_text("Refer And Earn Get 10GB Upload Limit\nPer Refer 10GB", reply_to_message_id=message.message_id, reply_markup=reply_markup)
+    await message.reply_photo(
+        photo=https://telegra.ph/file/1f1e29702f6cb8fd157e3.jpg,
+        text="ʀᴇꜰᴇʀ ᴀɴᴅ ᴇᴀʀɴ ɢᴇᴛ 5ɢʙ ᴜᴘʟᴏᴀᴅ ʟɪᴍɪᴛ\nᴘᴇʀ ʀᴇꜰᴇʀ 5ɢʙ,
+        reply_to_message_id=message.message_id, 
+        reply_markup=reply_markup,
+        quote=True
+    )
