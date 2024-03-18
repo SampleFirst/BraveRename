@@ -2,9 +2,6 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from info import *
-
-
-# Import helper functions
 from helper.database import botdata, find_one, total_user, getid
 from helper.progress import humanbytes
 
@@ -19,18 +16,19 @@ async def users(client, message):
     id = str(getid())
     ids = id.split(',')
 
+    ids_list = "\n".join([f"{index}. {user_id}" for index, user_id in enumerate(ids, start=1)])
+
     await message.reply_text(
-        f"🆔 All IDS : {ids}\n\n"
-        f"🛗 Total User :- {total_user()}\n\n"
-        f"📂 Total Renamed File :- {total_rename}\n"
-        f"🗃️ Total Size Renamed :- {humanbytes(int(total_size))}",
+        f"🛗 ᴛᴏᴛᴀʟ ᴜꜱᴇʀ :- {total_user()}\n\n"
+        f"📂 ᴛᴏᴛᴀʟ ʀᴇɴᴀᴍᴇᴅ ꜰɪʟᴇ :- {total_rename}\n"
+        f"🗃️ ᴛᴏᴛᴀʟ ꜱɪᴢᴇ ʀᴇɴᴀᴍᴇᴅ :- {humanbytes(int(total_size))}\n\n"
+        f"🆔 ᴀʟʟ ɪᴅꜱ :\n{ids_list}",
         quote=True,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("✖️ Close Menu ✖️", callback_data="cancel")
+                    InlineKeyboardButton("✖️ ᴄʟᴏꜱᴇ ✖️", callback_data="cancel")
                 ]
             ]
         )
     )
-
