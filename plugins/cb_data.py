@@ -26,30 +26,34 @@ async def cancel(bot, update):
 
 @Client.on_callback_query(filters.regex('rename'))
 async def rename(bot, update):
-    date_fa = str(update.message.date)
-    pattern = '%Y-%m-%d %H:%M:%S'
-    date = int(time.mktime(time.strptime(date_fa, pattern)))
-    chat_id = update.message.chat.id
-    id = update.message.reply_to_message_id
-    await update.message.delete()
-    await update.message.reply_text(
-        f"ᴇɴᴛᴇʀ ɴᴇᴡ ꜰɪʟᴇ ɴᴀᴍᴇ...",
-        reply_to_message_id=id,
-        reply_markup=ForceReply(True)
-    )
-    dateupdate(chat_id, date)
+    try:
+        date_fa = str(update.message.date)
+        pattern = '%Y-%m-%d %H:%M:%S'
+        date = int(time.mktime(time.strptime(date_fa, pattern)))
+        chat_id = update.message.chat.id
+        id = update.message.reply_to_message_id
+        await update.message.delete()
+        await update.message.reply_text(
+            f"ᴇɴᴛᴇʀ ɴᴇᴡ ꜰɪʟᴇ ɴᴀᴍᴇ...",
+            reply_to_message_id=id,
+            reply_markup=ForceReply(True)
+        )
+        dateupdate(chat_id, date)
+    except Exception as e:
+        print(f"error: {e}")
 
 @Client.on_callback_query(filters.regex('default'))
-async def default(client, update):
-    date_fa = str(update.message.date)
-    pattern = '%Y-%m-%d %H:%M:%S'
-    date = int(time.mktime(time.strptime(date_fa, pattern)))
-    chat_id = update.message.chat.id
-    media = await client.get_messages(update.message.chat.id, update.message.reply_to_message_id)  # Using message.message to access the associated message
-    file = media.document or media.video or media.audio
-    filename = file.file_name
-    await defaultfunc(filename)
-    dateupdate(chat_id, date)
+async def default_rename(bot, update):
+    try:
+        media_message = update.message.reply_to_message
+        original_filename = media_message.document.file_name if media_message.document else \
+                            media_message.video.file_name if media_message.video else \
+                            media_message.audio.file_name if media_message.audio else None
+    
+        if original_filename:
+            await rename_file(bot, update, original_filename)
+    except Exception as e:
+        print(f"error: {e}")
     
     
 @Client.on_callback_query(filters.regex("doc"))
