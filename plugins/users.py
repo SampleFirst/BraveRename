@@ -16,7 +16,7 @@ async def users(client, message):
     id = str(getid())
     ids = id.split(',')
 
-    ids_list = "\n".join([f"{index}. {user_id}" for index, user_id in enumerate(ids, start=1)])
+    ids_list = "\n".join(f"{index}. {user_id}" for index, user_id in enumerate(ids, start=1))
 
     await message.reply_text(
         f"🛗 ᴛᴏᴛᴀʟ ᴜꜱᴇʀ :- {total_user()}\n\n"
