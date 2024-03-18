@@ -15,8 +15,9 @@ async def add_thumbs(client, message):
     user_id = message.from_user.id
     if user_id not in user_thumbnail_set or not user_thumbnail_set[user_id]:
         return
-    
-    if file_id = str(message.photo.file_id)
+
+    file_id = str(message.photo.file_id)
+    if file_id:
         addthumb(user_id, file_id)
         user_thumbnail_set[user_id] = False
         await message.reply_text("ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ! ✅", quote=True)
