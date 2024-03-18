@@ -16,11 +16,14 @@ async def add_thumbs(client, message):
     if user_id not in user_thumbnail_set or not user_thumbnail_set[user_id]:
         return
     
-    file_id = str(message.photo.file_id)
-    addthumb(user_id, file_id)
-    user_thumbnail_set[user_id] = False
-    await message.reply_text("ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ! ✅", quote=True)
-
+    if file_id = str(message.photo.file_id)
+        addthumb(user_id, file_id)
+        user_thumbnail_set[user_id] = False
+        await message.reply_text("ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ! ✅", quote=True)
+    else:
+        user_thumbnail_set[user_id] = False
+        await message.reply_text("ʜᴇʏ ᴜꜱᴇʀ ᴛʜɪꜱ ɴᴏᴛ ᴀ ᴘʜᴏᴛᴏ ꜰᴏʀ ꜱᴇᴛ ᴛʜᴜᴍʙɴᴀɪʟ! 🤔", quote=True)
+    
 @Client.on_message(filters.private & filters.command(['view_thumb']))
 async def view_thumb(client, message):
     user_id = message.from_user.id
@@ -35,4 +38,4 @@ async def remove_thumb(client, message):
     user_id = message.from_user.id
     delthumb(user_id)
     await message.reply_text("**ᴛʜᴜᴍʙɴᴀɪʟ ᴅᴇʟᴇᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ**", quote=True)
-
+    
