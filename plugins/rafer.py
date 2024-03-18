@@ -15,7 +15,6 @@ async def refer(client, message):
         chat_id=message.chat.id,
         photo="https://telegra.ph/file/1f1e29702f6cb8fd157e3.jpg",
         caption="ʀᴇꜰᴇʀ ᴀɴᴅ ᴇᴀʀɴ ɢᴇᴛ 5ɢʙ ᴜᴘʟᴏᴀᴅ ʟɪᴍɪᴛ\nᴘᴇʀ ʀᴇꜰᴇʀ 5ɢʙ",
-        reply_to_message_id=message.message_id, 
         reply_markup=reply_markup,
         quote=True
     )
