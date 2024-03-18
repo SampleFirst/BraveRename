@@ -364,7 +364,7 @@ async def send_doc(client, message):
     conversion = datetime.timedelta(seconds=left)
     ltime = str(conversion)
     if left > 0:
-        await message.reply_text(caption=script.FLOOD_TEXT.format(ltime), reply_to_message_id=message.id)
+        await message.reply_text(caption=script.FLOOD_TEXT.format(a=ltime), reply_to_message_id=message.id)
     else:
         media = await client.get_messages(message.chat.id, message.id)
         file = media.document or media.video or media.audio
