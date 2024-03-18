@@ -43,15 +43,16 @@ async def rename(bot, update):
         print(f"error: {e}")
 
 @Client.on_callback_query(filters.regex('default'))
-async def default_rename(bot, update):
+async def default(bot, update):
     try:
-        media_message = update.message.reply_to_message
-        original_filename = media_message.document.file_name if media_message.document else \
-                            media_message.video.file_name if media_message.video else \
-                            media_message.audio.file_name if media_message.audio else None
-    
-        if original_filename:
-            await rename_file(bot, update, original_filename)
+        date_fa = str(update.message.date)
+        pattern = '%Y-%m-%d %H:%M:%S'
+        date = int(time.mktime(time.strptime(date_fa, pattern)))
+        chat_id = update.message.chat.id
+        id = update.message.reply_to_message_id
+        await update.message.delete()
+        await rename_file()
+        dateupdate(chat_id, date)
     except Exception as e:
         print(f"error: {e}")
     
