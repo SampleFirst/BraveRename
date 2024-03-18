@@ -2,7 +2,7 @@ import random
 
 class script(object):
     START_TEXT = """ʜᴇʏ! {},\nᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ʀᴇɴᴀᴍᴇ ʙᴏᴛ"""
-    SOURCE_TEXT = """<b>Note:</b>\n- ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ ɪꜱ ɴᴏᴛ ᴀɴ ᴏᴘᴇɴ ꜱᴏᴜʀᴄᴇ"""
+    SOURCE_TEXT = """<b>ɴᴏᴛᴇ:</b>\n- ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ ɪꜱ ɴᴏᴛ ᴀɴ ᴏᴘᴇɴ ꜱᴏᴜʀᴄᴇ"""
     RENDER_TEXT = f"""<b>ɴᴏᴛᴇ:</b>
  🌐 SYSTEM STATUS 🌐
 
@@ -15,8 +15,8 @@ class script(object):
 v[2.3.4] stable"""
     HELP_TEXT = """ʜᴇʏ\nᴜᴘᴅᴀᴛᴇᴅ ʜᴇʟᴘ ᴛᴇxᴛ."""
     ABOUT_TEXT = """ʜᴇʏ\nᴜᴘᴅᴀᴛᴇᴅ ᴀʙᴏᴜᴛ ᴛᴇxᴛ."""
-    THUMBNAIL_TEXT = """<b>Note:</b>\n🌌How to Set Thumbnail\n\nSend any photo to me, and I will save it automatically.\n/delthumb : Use this command to delete old thumbnail. \n/viewthumb : Use this command to view your current thumbnail."""
-    CAPTION_TEXT = """<b>Note:</b>\n📝 How to Set Caption\n\n/set_caption Set a custom caption for your content.\n/see_caption: To view your custom caption.\n/delete_caption: Remove your custom caption from my DB."""
+    THUMBNAIL_TEXT = """<b>ɴᴏᴛᴇ:</b>\n🌌 ʜᴏᴡ ᴛᴏ ꜱᴇᴛ ᴛʜᴜᴍʙɴᴀɪʟ\n\nꜱᴇɴᴅ ᴀɴʏ ᴘʜᴏᴛᴏ ᴛᴏ ᴍᴇ, ᴀɴᴅ ɪ ᴡɪʟʟ ꜱᴀᴠᴇ ɪᴛ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ.\n\n/viewthumb : ᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ᴠɪᴇᴡ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ᴛʜᴜᴍʙɴᴀɪʟ.\n/delthumb : ᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ᴅᴇʟᴇᴛᴇ ᴏʟᴅ ᴛʜᴜᴍʙɴᴀɪʟ."""
+    CAPTION_TEXT = """<b>ɴᴏᴛᴇ:</b>\n📝 ʜᴏᴡ ᴛᴏ ꜱᴇᴛ ᴄᴀᴘᴛɪᴏɴ\n\n/set_caption ꜱᴇᴛ ᴀ ᴄᴜꜱᴛᴏᴍ ᴄᴀᴘᴛɪᴏɴ ꜰᴏʀ ʏᴏᴜʀ ᴄᴏɴᴛᴇɴᴛ.\n/see_caption : ᴛᴏ ᴠɪᴇᴡ ʏᴏᴜʀ ᴄᴜꜱᴛᴏᴍ ᴄᴀᴘᴛɪᴏɴ.\n/del_caption : ʀᴇᴍᴏᴠᴇ ʏᴏᴜʀ ᴄᴜꜱᴛᴏᴍ ᴄᴀᴘᴛɪᴏɴ ꜰʀᴏᴍ ᴍʏ ᴅʙ."""
     WONX_TEXT = """ʏᴏᴜʀ ꜰʀɪᴇɴᴅ ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴜꜱɪɴɢ ᴏᴜʀ ʙᴏᴛ"""
     WON_TEXT = """🎉 ᴄᴏɴɢʀᴀᴛᴜʟᴀᴛɪᴏɴꜱ! ʏᴏᴜ ᴡᴏɴ 10ɢʙ ᴜᴘʟᴏᴀᴅ ʟɪᴍɪᴛ"""
     SUB_TEXT = """🔒 ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ꜰᴏʀ ᴜꜱɪɴɢ ʙᴏᴛ"""
