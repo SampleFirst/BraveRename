@@ -8,7 +8,7 @@ async def add_caption(client, message):
     if len(message.command) == 1:
         return await message.reply_text("**ɢɪᴠᴇ ᴍᴇ ᴀ ᴄᴀᴘᴛɪᴏɴ ᴛᴏ ꜱᴇᴛ.\n\nᴇxᴀᴍᴘʟᴇ:- `/set_caption File Name`**", quote=True)
     caption = message.text.split(" ", 1)[1]
-    add_caption(int(message.chat.id), caption)
+    addcaption(int(message.chat.id), caption)
     await message.reply_text("**ʏᴏᴜʀ ᴄᴀᴘᴛɪᴏɴ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴀᴅᴅᴇᴅ ✅**", quote=True)
 
 
@@ -18,7 +18,7 @@ async def delete_caption(client, message):
     if not caption:
         await message.reply_text("**ʏᴏᴜ ᴅᴏɴᴛ ʜᴀᴠᴇ ᴀɴʏ ᴄᴜꜱᴛᴏᴍ ᴄᴀᴘᴛɪᴏɴ**", quote=True)
         return
-    del_caption(int(message.chat.id))
+    delcaption(int(message.chat.id))
     await message.reply_text("**ʏᴏᴜʀ ᴄᴀᴘᴛɪᴏɴ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ ✅**", quote=True)
 
 
