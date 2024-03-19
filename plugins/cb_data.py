@@ -83,7 +83,7 @@ async def doc(bot, update):
         caption = new_tex.format(
             filename=new_filename, filesize=humanbytes(file.file_size))
     else:
-        caption = f"**{new_filename}**"
+        caption = f"{new_filename}"
     if thumb:
         ph_path = await bot.download_media(thumb)
         Image.open(ph_path).convert("RGB").save(ph_path)
@@ -177,7 +177,7 @@ async def vid(bot, update):
         caption = new_tex.format(filename=new_filename, filesize=humanbytes(
             file.file_size), duration=timedelta(seconds=duration))
     else:
-        caption = f"**{new_filename}**"
+        caption = f"{new_filename}"
     if thumb:
         ph_path = await bot.download_media(thumb)
         Image.open(ph_path).convert("RGB").save(ph_path)
@@ -272,7 +272,7 @@ async def aud(bot, update):
         caption = new_tex.format(filename=new_filename, filesize=humanbytes(
             file.file_size), duration=timedelta(seconds=duration))
     else:
-        caption = f"**{new_filename}**"
+        caption = f"{new_filename}"
 
     if thumb:
         ph_path = await bot.download_media(thumb)
@@ -308,6 +308,3 @@ async def aud(bot, update):
             used_limit(update.from_user.id, neg_used)
             os.remove(file_path)
             
-            
- 
-
