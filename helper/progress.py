@@ -19,7 +19,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         filled_blocks = math.floor(percentage / 5)
         empty_blocks = 20 - filled_blocks
 
-        progress_bar = "🚣‍♂️" * filled_blocks + "🌊" * empty_blocks
+        progress_bar = "█" * filled_blocks + "░" * empty_blocks
 
         tmp = PROGRESS_BAR.format(
             round(percentage, 2),
@@ -81,9 +81,11 @@ def TimeFormatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-PROGRESS_BAR = """{5}
-● 🗂️ : {1} | {2}
-● ⏳️ : {0}%
-● 🚀 : {3}/s
-● ⏱️ : {4}
-"""
+PROGRESS_BAR = """\n
+{5}
+╭━❰ PROGRESS BAR ❱━➣
+┣⪼ 🗂️ : {1} | {2}
+┣⪼ ⏳️ : {0}%
+┣⪼ 🚀 : {3}/s
+┣⪼ ⏱️ : {4}
+╰━━━━━━━━━━━━━━━➣ """
