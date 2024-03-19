@@ -81,11 +81,11 @@ def TimeFormatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-PROGRESS_BAR = """\n
-{5}
-╭━❰ PROGRESS BAR ❱━➣
+PROGRESS_BAR = """{5}
+
+╭━━❰ PROGRESS BAR ❱━━➣
 ┣⪼ 🗂️ : {1} | {2}
 ┣⪼ ⏳️ : {0}%
 ┣⪼ 🚀 : {3}/s
 ┣⪼ ⏱️ : {4}
-╰━━━━━━━━━━━━━━━➣ """
+╰━━━━━━━━━━━━━━━━━➣ """
