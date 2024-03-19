@@ -272,7 +272,7 @@ async def admincmd_callback_handler(client, query):
         )
     else:
         await query.answer(
-            text="🔒 ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ꜰᴏʀ ᴍʏ ᴀᴅᴍɪɴꜱ..")
+            text="🔒 ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ꜰᴏʀ ᴍʏ ᴀᴅᴍɪɴꜱ.."),
             show_alert=True
         )
     
