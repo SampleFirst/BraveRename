@@ -30,8 +30,9 @@ DATABASE_NAME = environ.get("DATABASE_NAME", "")
 DATABASE_URL = environ.get("DATABASE_URL", "")
 
 # Channel and groups
-CHANNEL = environ.get('CHANNEL', "")
-LOG_CHANNEL = environ.get('LOG_CHANNEL', "")
+channel = environ.get('CHANNEL')
+CHANNEL = int(channel) if channel and id_pattern.search(channel) else None
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', 0))
 UPDATE_CHANNEL = environ.get('UPDATE_CHANNEL', "https://t.me/iPepkornUpdate")
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', "https://t.me/iPepkornSupport")
 PROMO_CHANNAL = environ.get('PROMO_CHANNEL', "https://t.me/iPepkornUpdate")
