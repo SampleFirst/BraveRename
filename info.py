@@ -20,8 +20,8 @@ BOT_TOKEN = environ['BOT_TOKEN']
 STRING = environ.get("STRING", "")
 PICS = environ.get("PICS", "")
 
-ADMINS = int(environ.get("ADMINS", 0))
-BOT_USERNAME = environ.get("BOT_USERNAME", "")
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '').split()]
+BOT_USERNAME = environ.get("BOT_USERNAME", "Allmoviereq_bot")
 DOWNLOAD_LOCATION = "./DOWNLOADS"
 FLOOD = 500
 
