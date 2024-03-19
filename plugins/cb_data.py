@@ -182,7 +182,6 @@ async def vid(bot, update):
         ph_path = await bot.download_media(thumb)
         Image.open(ph_path).convert("RGB").save(ph_path)
         img = Image.open(ph_path)
-        img.resize((1920, 1080))
         img.save(ph_path, "JPEG")
         c_time = time.time()
 
