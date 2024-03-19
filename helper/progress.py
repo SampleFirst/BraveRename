@@ -19,7 +19,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         filled_blocks = math.floor(percentage / 5)
         empty_blocks = 20 - filled_blocks
 
-        progress_bar = "■" * filled_blocks + "□" * empty_blocks
+        progress_bar = "🚣‍♂️" * filled_blocks + "🌊" * empty_blocks
 
         tmp = PROGRESS_BAR.format(
             round(percentage, 2),
@@ -43,7 +43,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
 
         try:
             await message.edit(
-                text=f"{ud_type}\n\n{tmp}",
+                text=f"{ud_type}\n{tmp}",
                 reply_markup=InlineKeyboardMarkup(button)
             )
         except Exception:
@@ -81,8 +81,9 @@ def TimeFormatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-PROGRESS_BAR = """● {5} 
+PROGRESS_BAR = """{5}
 ● 🗂️ : {1} | {2}
 ● ⏳️ : {0}%
 ● 🚀 : {3}/s
-● ⏱️ : {4}"""
+● ⏱️ : {4}
+"""
