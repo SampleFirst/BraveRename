@@ -36,12 +36,12 @@ async def start(client, message):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
-                        InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
+                        InlineKeyboardButton("🔄 ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
+                        InlineKeyboardButton("💬 ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
                     ],
                     [
-                        InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
-                        InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
+                        InlineKeyboardButton("❓ ʜᴇʟᴘ", callback_data='help'),
+                        InlineKeyboardButton("ℹ️ ᴀʙᴏᴜᴛ", callback_data='about')
                     ]
                 ]
             )
@@ -57,12 +57,12 @@ async def start(client, message):
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
-                                InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
+                                InlineKeyboardButton("🔄 ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
+                                InlineKeyboardButton("💬 ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
                             ],
                             [
-                                InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
-                                InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
+                                InlineKeyboardButton("❓ ʜᴇʟᴘ", callback_data='help'),
+                                InlineKeyboardButton("ℹ️ ᴀʙᴏᴜᴛ", callback_data='about')
                             ]
                         ]
                     )
@@ -81,10 +81,10 @@ async def start(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL))
+                            InlineKeyboardButton("🔄 ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL))
                         ],
                         [
-                            InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
+                            InlineKeyboardButton("❓ ʜᴇʟᴘ", callback_data='help')
                         ]
                     ]
                 )
@@ -115,12 +115,12 @@ async def help_callback_handler(client, query):
 
     buttons = [
         [
-            InlineKeyboardButton("ᴛʜᴜᴍʙɴᴀɪʟ", callback_data='thumbnail'),
-            InlineKeyboardButton("ᴄᴀᴘᴛɪᴏɴ", callback_data='caption')
+            InlineKeyboardButton("🌌 ᴛʜᴜᴍʙɴᴀɪʟ", callback_data='thumbnail'),
+            InlineKeyboardButton("📝 ᴄᴀᴘᴛɪᴏɴ", callback_data='caption')
         ],
         [
-            InlineKeyboardButton("ʜᴏᴍᴇ", callback_data='home'),
-            InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
+            InlineKeyboardButton("⬅️ ʜᴏᴍᴇ", callback_data='home'),
+            InlineKeyboardButton("ℹ️ ᴀʙᴏᴜᴛ", callback_data='about')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -148,12 +148,8 @@ async def about_callback_handler(client, query):
 
     buttons = [
         [
-            InlineKeyboardButton("ᴛʜᴜᴍʙɴᴀɪʟ", callback_data='thumbnail'),
-            InlineKeyboardButton("ᴄᴀᴘᴛɪᴏɴ", callback_data='caption')
-        ],
-        [
-            InlineKeyboardButton("ʜᴏᴍᴇ", callback_data='home'),
-            InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help')
+            InlineKeyboardButton("ℹ️ ᴀʙᴏᴜᴛ", callback_data='about'),
+            InlineKeyboardButton("⬅️ ʜᴏᴍᴇ", callback_data='home')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -180,7 +176,7 @@ async def caption_callback_handler(client, query):
         )
     buttons = [
         [
-            InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
+            InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data='help')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -207,7 +203,7 @@ async def thumbnail_callback_handler(client, query):
         )
     buttons = [
         [
-            InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
+            InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data='help')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -234,12 +230,12 @@ async def home_callback_handler(client, query):
         )
     buttons = [
         [
-            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
-            InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
+            InlineKeyboardButton("🔄 ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
+            InlineKeyboardButton("💬 ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
         ],
         [
-            InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
-            InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
+            InlineKeyboardButton("❓ ʜᴇʟᴘ", callback_data='help'),
+            InlineKeyboardButton("ℹ️ ᴀʙᴏᴜᴛ", callback_data='about')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -279,7 +275,7 @@ async def source_callback_handler(client, query):
         )
     buttons = [
         [
-            InlineKeyboardButton("ʙᴀᴄᴋ", callback_data='help')
+            InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data='help')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -306,7 +302,7 @@ async def send_doc(client, message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL))
+                            InlineKeyboardButton("🔓 ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url=(UPDATE_CHANNEL))
                         ]
                     ]
                 )
@@ -341,12 +337,12 @@ async def send_doc(client, message):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
-                        InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
+                        InlineKeyboardButton("🔄 ᴜᴘᴅᴀᴛᴇ", url=(UPDATE_CHANNEL)),
+                        InlineKeyboardButton("💬 ꜱᴜᴘᴘᴏʀᴛ", url=(SUPPORT_CHAT)),
                     ],
                     [
-                        InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
-                        InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')
+                        InlineKeyboardButton("❓ ʜᴇʟᴘ", callback_data='help'),
+                        InlineKeyboardButton("ℹ️ ᴀʙᴏᴜᴛ", callback_data='about')
                     ]
                 ]
             )
