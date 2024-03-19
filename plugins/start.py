@@ -23,9 +23,6 @@ botid = BOT_TOKEN.split(':')[0]
 
 @Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
-    loading_sticker_message = await message.reply_sticker("CAACAgIAAxkBAAELv8Zl-cjIOaEQzZuHbWPqRmtooq1lGAACZxgAAhVrEUl0h6G66-of7DQE")
-    await asyncio.sleep(2)
-    await loading_sticker_message.delete()
     old = insert(int(message.chat.id))
     try:
         id = message.text.split(' ')[1]
