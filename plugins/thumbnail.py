@@ -17,20 +17,17 @@ async def add_thumbs(client, message):
         return
 
     file_id = str(message.photo.file_id)
-    if file_id:
-        addthumb(user_id, file_id)
-        user_thumbnail_set[user_id] = False
-        await message.reply_text("ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ! ✅", quote=True)
-    else:
-        user_thumbnail_set[user_id] = False
-        await message.reply_text("ʜᴇʏ ᴜꜱᴇʀ ᴛʜɪꜱ ɴᴏᴛ ᴀ ᴘʜᴏᴛᴏ ꜰᴏʀ ꜱᴇᴛ ᴛʜᴜᴍʙɴᴀɪʟ! 🤔", quote=True)
-    
+    addthumb(user_id, file_id)
+    user_thumbnail_set[user_id] = False
+    await message.reply_text("ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ! ✅", quote=True)
+
+
 @Client.on_message(filters.private & filters.command(['view_thumb']))
 async def view_thumb(client, message):
     user_id = message.from_user.id
     thumb = find(user_id)[0]
     if thumb:
-        await client.send_photo(user_id, photo=thumb, quote=True)
+        await client.send_photo(user_id, photo=thumb)
     else:
         await message.reply_text("**ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀɴʏ ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇᴛ**", quote=True)
 
