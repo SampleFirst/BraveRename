@@ -23,7 +23,7 @@ botid = BOT_TOKEN.split(':')[0]
 
 @Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
-    loading_sticker_message = await message.reply_sticker("CAACAgUAAxkBAAEKDf1k3mCOA5HUO51nPYSN-yaCNFj1PQAC7QoAAgEFoFRUQkvwYhdUWTAE")
+    loading_sticker_message = await message.reply_sticker("CAACAgIAAxkBAAELv8Zl-cjIOaEQzZuHbWPqRmtooq1lGAACZxgAAhVrEUl0h6G66-of7DQE")
     await asyncio.sleep(2)
     await loading_sticker_message.delete()
     old = insert(int(message.chat.id))
@@ -148,6 +148,10 @@ async def about_callback_handler(client, query):
 
     buttons = [
         [
+            InlineKeyboardButton("👥 ᴜꜱᴇʀ ᴄᴍᴅ", callback_data='usercmd'),
+            InlineKeyboardButton("👤 ᴀᴅᴍɪɴ ᴄᴍᴅ", callback_data='admincmd')
+        ],
+        [
             InlineKeyboardButton("ℹ️ ᴀʙᴏᴜᴛ", callback_data='about'),
             InlineKeyboardButton("⬅️ ʜᴏᴍᴇ", callback_data='home')
         ]
@@ -213,7 +217,65 @@ async def thumbnail_callback_handler(client, query):
         parse_mode=enums.ParseMode.HTML
     )
 
-
+@Client.on_callback_query(filters.regex(r"^usercmd$"))
+async def usercmd_callback_handler(client, query):
+    loading_placeholder = "◌◌◌"
+    await query.message.edit_text(
+        text=loading_placeholder,
+        parse_mode=enums.ParseMode.HTML
+    )
+    for _ in range(3):
+        await asyncio.sleep(0.2)  # Simulating loading delay
+        loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
+    buttons = [
+        [
+            InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data='about')
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await query.message.edit_text(
+        text=script.USER_TEXT,
+        reply_markup=reply_markup,
+        parse_mode=enums.ParseMode.HTML
+    )
+    
+@Client.on_callback_query(filters.regex(r"^admincmd$"))
+async def admincmd_callback_handler(client, query):
+    user_id = query.from_user.id
+    if user_id in ADMINS:
+        loading_placeholder = "◌◌◌"
+        await query.message.edit_text(
+            text=loading_placeholder,
+            parse_mode=enums.ParseMode.HTML
+        )
+        for _ in range(3):
+            await asyncio.sleep(0.2)  # Simulating loading delay
+            loading_placeholder = loading_placeholder.replace("◌", "●", 1)
+            await query.message.edit_text(
+                text=loading_placeholder,
+                parse_mode=enums.ParseMode.HTML
+            )
+        buttons = [
+            [
+                InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data='about')
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.ADMIN_TEXT,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+    else:
+        await query.answer(
+            text="🔒 ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ꜰᴏʀ ᴍʏ ᴀᴅᴍɪɴꜱ..")
+            show_alert=True
+        )
+    
 @Client.on_callback_query(filters.regex(r"^home$"))
 async def home_callback_handler(client, query):
     loading_placeholder = "◌◌◌"
